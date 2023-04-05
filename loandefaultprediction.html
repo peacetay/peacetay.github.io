@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Volunteer Management System</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Peace's Portfolio</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">Projects</a></li>
+							<li><a href="aboutme.html">About Me</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/peacetay/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/peacetay" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								</header>
+								<div class="image main"><img src="images/loan.jpg" alt="" /></div>
+								<h2>Loan Default Prediction</h2>
+								<p>xxxxx</p>
+								<a href="https://github.com/peacetay/LoanDefaultPrediction" class="button">View Scripts Here!</a>	
+								<p><br></p>
+
+								<h3>1. Datasets</h3>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:30%">Data</th>
+										<th style = "width:70%">Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Traindemographics.csv</td>
+										<td>Demographics of the loan applicants. (Birthdate, Bank account type, Brank Name, Bank Branch, Employment Status, Level of Education)</td>
+										</tr>
+										<tr>
+										<td>Trainperf.csv</td>
+										<td>Current loan details (Loan applicants’ ID, System Loan ID, Loan Number, Loan Amount, Total Due, Term Days, Referral ID, Flag)</td>
+										</tr>
+										<tr>
+										<td>Trainprevloans.csv</td>
+										<td>Previous loans details (Loan applicants’ ID, System Loan ID, Loan Number, Loan Amount, Total Due, Term Days, Referral ID, First Due Date, First Paid Date)</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<h3>2. Data Preparation</h3>
+								<div class="image main"><img src="images/loan-01.jpg" alt="" /></div>
+
+								<h4>2.1. Data Pre-Processing</h4>
+								<p>Datasets were imported into JMP PRO through their original .csv files. As JMP PRO might interpret data incorrectly, the team primarily focused on modifying data types and modelling types. All 3 datasets (performance, previous loan, and demographics) were combined using the inner-join function based on a common variable (“customerID”) before data cleaning and transformation. By using the inner-join function, customers without loan history and are not present in the demographics file were removed. This paper focused on the customers that are commonly present in all 3 files.<br>
+									For data transformation, variable “referredby” is in identity format, we found that each identity is unique and hence it would not serve a purpose in building a predictive model. Therefore “referredby” was transformed into a binary variable of - 1 if there is a referral and 0 is there is no referral. In addition, “firstduedate” and “firstpaiddate” variable do not serve a purpose if they are being analysed individually, formulas were used to create a binary variable under the condition that if “firstduedate” < “firstpaiddate”, it would represent that the customer has had a late payment. <br>
+									“Longitude_gps” and “latitude_gps” represents the coordinates of where the data of each “customerId” is being recorded. However, it does not represent the customer’s true home location as they might be just visitors where the data are being collected. These two variables would be deemed as irrelevant as they do not reflect the customer’s true home location and maybe biased depending on the data collection locations. Therefore, these two variables were excluded.<br>
+									For data cleaning, imbalanced categorization of data was recoded to allow a better representation of category groups. Multivariate analysis was also carried out to remove highly correlated variables.<br>
+									For full Data Processing and Preparation treatment, refer to Annex: Data Preparation Log Table & Data Transformation Log Table.</p>
+								
+								<h3>3. Data Description</h3>
+								<p>Due to different sampling methods used, methods that produced the same number of samples are grouped together in one JMP file while those with different sample sizes are grouped in a different JMP file. Below are the sampling methods mapping to the JMP files that they are saved into. </p>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:30%">Sampling Method</th>
+										<th style = "width:70%">JMP File</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>No Weighting</td>
+										<td>final_combine_train with Tomek and Others.jmp</td>
+										</tr>
+										<tr>
+										<td>Weighting</td>
+										<td>final_combine_train with Tomek and Others.jmp</td>
+										</tr>
+										<tr>
+										<td>Tomek Links (Tomek Majority NN Paris)</td>
+										<td>final_combine_train with Tomek and Others.jmp</td>
+										</tr>
+										<tr>
+										<td>Tomek Links (Tomek NN Paris)</td>
+										<td>final_combine_train with Tomek and Others.jmp</td>
+										</tr>									
+										<tr>
+										<td>Oversampling</td>
+										<td>final_combine_train with Tomek and Others.jmp</td>
+										</tr>
+										<tr>
+										<td>SMOTE</td>
+										<td>final_combine_train with SMOTE.jmp</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<h3>4. Data Sampling Methods</h3>
+								<div class="image main"><img src="images/loan-02.jpg" alt="" /></div>
+
+								<h3>5. Predictive Models</h3>
+								<p>Four types of models were built: Logistic Regression, Decision Tree, Bootstrap Forest, and Boosted Tree. The main objective is to classify a customer’s loan application as good or bad, based on previous loan data as well as the customer’s demographic information.</p>
+								
+								<h4>5.1. Logistic Regression</h4>
+								<p>Logistic Regression (LR) models (Masmoudi, n.d.) the non-linear relationship between a binary dependent variable and categorical or continuous predictors. The logistic model outputs a probability of an event between 0 and 1 as the log odds ratio by:</p>
+								<div class="image main"><img src="images/loan-03.jpg" alt="" /></div>
+								<p>where p_i represents the probability of “default” for a particular customer, and 〖(1-p〗_i) being the probability of “no default”. This probability is a function of the predictive variables x_i (outstanding loan amount, first due date of existing loan, first repaid date of existing loan, employment status of customer, education level of customer, age of customer etc). Logistic regression is easier to implement, interpret, and efficient to train. However, the major</p>
+
+								<h4>5.2. Decision Tree</h4>
+								<p>A Decision Tree takes a set of input features and splits input data recursively based on those features. Each split at a node is chosen to maximise information gain or minimise entropy. The splits are created recursively, with Chi-square logworth as the splitting criterion. At each split, the adjusted logworth are calculated and the partition that yields the highest logworth is deemed as the optimal split. The process is repeated until some stop condition is met, or until no node can be split as either all observations in the node consist of nearly the same target value or additional input will not contribute to the model. This process will also stop when minimum leaf size of 5 is reached, or no split exceeds the threshold worth requirement that is specified in the Chi-square significance level value. <br>
+									The tree is then applied to the validation dataset and is pruned branch by branch down to the root nodes. The validation assessment measure is calculated whenever the tree is pruned. The tree that produced the best validation assessment measure is eventually selected. As the target variable is binary, the assessment measure is to minimize the misclassification rate.</p>
+								
+								<h4>5.3. Bootstrap Forest</h4>
+								<p>The Bootstrap Forest is the ensemble technique used by Random Forest. It chooses a random sample from the data set, and each model is generated from the bootstrap samples provided by the original data with replacement. Each model is trained independently, which generates results. The predicted outcome of each tree is consolidated and the outcome with the highest votes are chosen as the final prediction. </p>
+								
+								<h4>5.4. Boosted Tree</h4>
+								<p>The Boosted Tree algorithm combined many Decision Trees into a stronger classifier. Each tree is created iteratively, and the tree’s output is given a weight relative to its accuracy. The ensemble output is the weighted sum:</p>
+								<div class="image main"><img src="images/loan-04.jpg" alt="" /></div>
+								<p>After each iteration, each data sample is given a weight based on its misclassification (i.e. the more often a data sample is misclassified, the more important it becomes). The goal is to minimise the objective function: </p>
+								<div class="image main"><img src="images/loan-05.jpg" alt="" /></div>
+								<p>Where l(y ̂_i y_i ) is the distance between the truth and the prediction of the ith sample. Ω(f_t ) is used to penalise the complexity of the ith tree.</p>
+
+								<h3>6. Model Comparison</h3>
+								<p>The models will be assessed based on the following definition for the confusion matrix – where True Positive (TP) refers to a case where the model predicted ‘good’ correctly, and True Negative (TN) refers to a case where the model predicted ‘bad’ correctly. </p>
+								<div class="image main"><img src="images/loan-06.jpg" alt="" /></div>
+								<div class="image main"><img src="images/loan-07.jpg" alt="" /></div>
+								<p>For predicting loan defaults, the assumptions made about banks are that they are: (1) profit driven, (2) want to avoid losing money due to loan defaults. This leads to the prioritisation of the following assessment criteria: (1) Low False Positive Rate, (2) High Accuracy and (3) Low Misclassification Rate. It gives a misclassification rate of ~14%, accuracy of ~86%, and a low false positive rate of ~17%. The worst performing sampling methods are No Weighting, Tomek Majority NN Pairs and Tomek NN Pairs as they consistently gives high false positive rates across predictive models, which is undesirable for loan default prediction.</p>
+
+								<h3>7. Findings and Discussions</h3>
+								<h4>7.1. Overfitting of Base Model</h4>
+								<p>The best results were provided by SMOTE resampling and Boosted Tree predictive model method. However, the variance between the Generalised RSquare value of the Training and Test data suggests that the model has overfitting (delta of 10%). When the model is overfitted, the predictive model starts to describe the random error in the data rather than the relationships between variables . Often, it is a result of an over complex model, which describes noise rather than meaningful relationships between the variables.<br>
+									Above and beyond finding the optimal resampling model for loan default prediction, the team attempted to optimise the model by fine-tuning the Boosted Tree parameters . The following techniques were used to reduce overfitting in the Boosted Tree Model:<br>
+									•	Reducing noise<br>
+									•	Pruning</p>
+
+								<h4>7.2. Removing Noise / Less Importance Variables</h4>
+								<p>To reduce the complexity of the loan default predictive model, the team removed variables which were assessed to be less important. Variables with the lowest G2 values were removed to reduce the complexity of the model. The variables that were removed are ‘Previous Loan Approved Date’ and ‘Previous Loan Term Days’. </p>
+								<div class="image main"><img src="images/loan-08.jpg" alt="" /></div>
+
+								<h4>7.3. Pruning of Boosted Tree</h4>
+								<p>Pruning is a technique to remove the parts of the Boosted Tree and not allow the model to grow to its full depth. By tuning the model parameters of the Boosted Tree model, we can prevent overfitting. For this study, we adopt ‘Pre-Pruning’ to stop early the growth of the decision tree and tune the following parameters:<br>
+									•	    Early stopping of the model<br>
+									•	    Increasing the number of layers in the Gradient-Boosted Tree Specification (300)<br>
+									•	    Reducing Splits per Tree (15)<br>
+									•	    Reducing the Minimum Size Split (4)</p>
+
+								<h4>7.4. Optimised Boosted Tree Model</h4>
+								<p>After optimising the model, the model is assessed to be no longer overfitted as the delta between the Generalised RSquare value of the Training and Test data is less than 10%. After optimising the Boosted Tree algorithm with the aim of reducing overfitting, the output model provided a misclassification rate of ~14%, accuracy of ~86%, and a low false positive rate of ~12%, which is an improvement from the assessment rates from the original boosted tree model. </p>
+								<div class="image main"><img src="images/loan-09.jpg" alt="" /></div>
+								<div class="image main"><img src="images/loan-10.jpg" alt="" /></div>
+
+								<h4>7.5. Most Significant Variable for Loan Default Prediction</h4>
+								<p>It was also discovered that there is a slight reorder of the top 3 prediction variables for the loan default prediction. </p>
+								<div class="image main"><img src="images/loan-11.jpg" alt="" /></div>
+								<p>The revised most significant variables are now: <br>
+									1.	Bank account type – where the customers are differentiated based on whether the client holds a Savings Account, or Current Account<br>
+									2.	Late payment – where the customers are differentiated based on whether he/she has previously had a late payment on previous loans<br>
+									3.	Employment status – where the employment status of the clients are recorded as Permanent, Self-Employed, Non-Permanent Employment or Unemployed. These are variables that provide insights into the financial background, and loan behaviour of the client seeking a loan. </p>
+								<h3>8. Conclusion</h3>
+								<p>The resultant data set studied focused only on customers with previous loans, where the best model for loan default prediction model is given by a combination of SMOTE resampling method and Boosted Tree prediction algorithm. After optimising the prediction model by reducing noise (less important variables) and pruning of trees, the optimised model gave an indication of the key prediction variables that contribute significantly to the loan default prediction, which are bank account types, any history of late payment, and clients’ employment statuses. <br>
+									This is likely because different bank account types serve different purposes as business owners tend to use Current Accounts for their business cash flows or for business loans, while personal bank account owners would use Savings Accounts to grow their savings. This would likely form a key consideration in the building of the prediction model as business loans may be deemed a riskier endeavour as compared to a personal loan or mortgage loan that is premised on an individual’s Savings Account. 
+									In addition, late payment indication from their previous loans also provided a trend record of the customers’ paying behaviour, further contributing to the loan default prediction. We see the application of this in the fact that the credit bureau of a country grades the credit score of an individual based on his/her loan payment behaviour. The client’s employment status is also a key contributor as it determines whether the client will receive a steady flow of income to service the loan.</p>
+								
+								<h3>9. Future Work</h3>
+								<p>With this study, we were able to develop a loan default prediction model using demographic information, previous loan data and current loan data. However, the following future works is proposed to improve the efficacies of the model.</p>
+								<p>•	Inclusion of additional data could be considered to improve the predictive model’s accuracy as financial history and behaviour were deemed to be important predictors. <br>
+									o	Customers’ financial condition (total household income)<br>
+									o	Customers’ loan purpose corresponding to the loan amount<br>
+									o	Customers’ credit history, credit card applications, repayment record and bankruptcy record</p>
+																		
+								<p>•	Besides financial history/behaviour and demographic data, further exploration can be done on combining other universe of predictors which could improve the loan default predictive model, such as macro-economic predictors. We recommend collecting macro-economic data for further analysis.<br>
+									o	Inflation rate<br>
+									o	Recession or no Recession<br>
+									o	Interest rates</p>										
+								<p>•	The methods used to transform and clean the data were general data specification rules which can be further explored to improve the model (e.g. <50% missing values or biased data). In this paper, inner join was used to combine the data tables, which resulted in the focus on only clients with loan history. Other data combination techniques could be studied to allow exploration of developing a loan default prediction model for customers without loan history.</p>
+								<p>•	Selected number of resampling methods and predictive models were studied. Further efforts could be placed on exploration of different sampling methods (e.g. SMOTE + TOMEK combination) and other predictive models (e.g. Support Vector Machine, XGBoost) to discover if they produce better prediction models. </p>									
+								<p>•	A Time-series approach on the prediction model could also be considered for future study to explore the possibility of seasonal trends in loan default cases. </p>
+
+								<p> <br></p>
+								<a href="https://github.com/peacetay/LoanDefaultPrediction" class="button">View Scripts Here!</a>	
+							</section>
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<section class="split contact">
+						<section class="alt">
+							<h3>Email</h3>
+							<p><a href="peacetay@gmail.com">peacetay@gmail.com</a></p>
+						</section>
+						<section>
+							<h3>Social</h3>
+							<ul class="icons alt">
+								<li><a href="https://www.linkedin.com/in/peacetay/" class="icon brands alt fa-linkedin"><span class="label">Linkedin</span></a></li>
+								<li><a href="https://github.com/peacetay" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+							</ul>
+						</section>
+					</section>
+				</footer>
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

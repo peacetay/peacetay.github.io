@@ -42,8 +42,739 @@
 									Credit card churn entails the loss of a customer, resulting in the forfeiture of future profits and the operating costs incurred in acquiring that customer. 
 								<p>The credit card customer churn rate represents the percentage of a bank's customers who cease using the bank's services. 
 									Consequently, comprehending the characteristics of customers who churn or remain loyal is crucial for banks to customize their marketing strategies, modify their services, or introduce new ones for optimal success.</p>
+								<a href="https://github.com/peacetay/CreditCardChurnAnalysis" class="button">View Scripts Here!</a>					
 								<p> <br></p>
-								<a href="https://github.com/peacetay/CreditCardChurnAnalysis" class="button">Check it Out!</a>					
+
+								<h3>1. Data Source</h3>
+								<p>•	https://www.kaggle.com/<br>
+									The dataset contains demographic, customer relationship and spending behaviour data. Refer to annex for table of data source. </p>
+								
+								<h3>2. Issues with Data Set</h3>
+								<p>Apart from the above data we sourced from Kaggle, we believe there are some critical components of this dataset that is not available. For instance, geographical customer data (Region, Country, City) is missing, an important variable for segmenting customer data. 
+									Banks are typically multi-national corporations and geographic segmentation divides a target market by locations so marketers can better strategize based on a particular location (Mapsted, 2021).</p>
+
+								<h3>3. Analytical Methodology</h3>
+								<div class="image main"><img src="images/creditcard-01.jpg" alt="" /></div>
+								<p>Figure 1: Analytical Methodology</p>
+
+								<p>As our primary business objective is to reduce the percentage churn, our main focus is to define our customer groups and understand the characteristic demographic or behaviour of these groups. 
+								This would allow us to target specific customer groups and customise our solution designs based on their characteristics.</p>
+								
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:25%">Method</th>
+										<th style = "width:75%">Rationale of Analytical Approach</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Customer Segmentation</td>
+										<td>The customers are segmented through KMeans clustering, an unsupervised learning technique. 
+											Analysing the churn rate of each customer group will give us a better understanding of whom we should prioritise as our target groups for marketing campaigns to reduce churn rate.</td>
+										</tr>
+										<tr>
+										<td>Predictive Modelling for Customers</td>
+										<td>Predictive modelling can be done on existing customer data that is unseen by the training model to predict which customer group a customer belongs. 
+											Improving our predictive model's accuracy will help us better classify new customers into their respective customer groups for marketing campaigns more relevant to them.</td>
+										</tr>
+										<tr>
+										<td>Feature Analysis within Clusters</td>
+										<td>Feature analysis for each cluster allows us to understand the most influential variables that affect the target customer group. 
+											We can reduce the churn rate by designing credit card packages that target what influences their behaviour the most.</td>
+										</tr>
+									</tbody>
+								</table>
+								<p>Table 1: Rationale of Analytical Approach</p>
+
+								<h3>4. Data Pre-Processing</h3>
+								<p>When using real world datasets, there are always bound to be errors such as missing or duplicate values and incorrect data entry. Hence, this dataset was analysed for missing or duplicate values, which yielded zero results. <br>
+									Multicollinearity was checked for all variables. There are a total of 3 pairs of highly correlated variables as seen in Figure 4. 
+									Total transaction count and total transaction amount have a correlation of 0.81 while credit limit and average open to buy ratio, as well as the pair of Bayes classifiers have a correlation of 1. <br>
+									Highly correlated variables could affect the predictive model as this correlation could create redundancies and overlaps making it unable for the prediction model to accurately gauge the importance and contribution of each independent variable on the response variables. 
+									Thus, these variables were removed in the data pre-processing stage. </p>
+								<div class="image main"><img src="images/creditcard-02.jpg" alt="" /></div>
+								<p>Figure 2: Variable Correlation Analysis</p>
+
+								<h3>5. Exploratory Data Analysis</h3>
+								<p>EDA is employed to better understand the dataset through data visualisation. It identifies issues with the dataset and interesting insights about relationships between variables and patterns within the dataset. 
+									Univariate, bivariate, and multivariate visualisations and summary statistics will allow for a better understanding of the complete dataset and explore potential factors that characterise or contribute to churn.<br>
+									Dataset reveals that 16.1% of customers have churned. (Figure 5) EDA will be employed to understand the distribution of existing and attrited customers in different categories. 
+									Due to some columns such as customer age and months on book being continuous numerical data types, they might be harder to work with for clustering and predictive modelling. 
+									As such, binning would make them into categorical data, which makes for clearer visualisation.</p>
+								<div class="image main"><img src="images/creditcard-03.jpg" alt="" /></div>
+								<p>Figure 3: Proportion of Attrited Customers</p>
+
+								<h4>•	Demographics</h4>
+								<p>Dataset contains demographic variables such as age, gender, education level and marital status, which were used to perform univariate analysis and understand the distribution of customers in both churned and non-churned segments. 
+									The team explored if certain demographic traits made a customer more predisposed to churn. <br>
+									There were 52.9% majority of female customers, however just analysing the distribution of gender was inadequate. 
+									As such, the team was interested to know if a particular gender was more prone to churn. By visualising the distributions of churn across each gender, female customers tend to be churn more than male customers.</p>
+								<div class="image main"><img src="images/creditcard-04.jpg" alt="" /></div>
+								<p>Figure 4a: Gender Distribution</p>
+
+								<div class="image main"><img src="images/creditcard-05.jpg" alt="" /></div>
+								<p>Figure 4b: Churn Distribution Across Males and Females</p>
+					
+								<p>Customer age was explored, to understand if any age group had higher tendencies to churn. It was observed that customers between 35 to 55 years old formed the majority of the customer base and had the highest churn rates. 
+									This could form a potential target group for recommendations to reduce churn, however clustering analysis together with other attributes is required to see if age plays an important role in churning. </p>
+								<div class="image main"><img src="images/creditcard-06.jpg" alt="" /></div>
+								<p>Figure 5: Churn Distribution Across Age Groups</p>
+
+								<h4>•	Spending Behaviour</h4>
+								<p>As expected, customers with a low average utilization ratio were most prone to churn. When customers sign up for credit cards when there are promotions which require a few transactions and a minimum spend requirement, typically, they would only spend the required amount and required number of times to redeem the promotion. 
+									This can be seen in Figure 8 where most of the churn is concentrated at the lowest utilization ratio.</p>
+								<div class="image main"><img src="images/creditcard-07.jpg" alt="" /></div>
+								<p>Figure 6: Churn Distribution Across Average Utilisation Ratios</p>
+
+								<p>Total transaction amount and total transaction count were seen to be highly correlated and hence, the team was interested to know if there was any patterns that could be unearthed from these 2 features. 
+									Churn is particularly concentrated at the low transaction amounts below 3k and transaction counts between 40 and 45. <br>
+									A scatter plot of the two variables was plotted and these revealed 3 distinct clusters. Customers can be grouped into low transactions, low value and medium transactions, medium value and thirdly, high transactions, high value. 
+									The first cluster with low transactions and low value would be our target group since it has the highest churn rate.</p>
+								<div class="image main"><img src="images/creditcard-08.jpg" alt="" /></div>
+								<p>Figure 7: Churn Distribution Across Total Transaction Amounts</p>
+
+								<div class="image main"><img src="images/creditcard-09.jpg" alt="" /></div>
+								<p>Figure 8: Churn Distribution Across Total Transaction Counts</p>
+	
+								<div class="image main"><img src="images/creditcard-10.jpg" alt="" /></div>
+								<p>Figure 9: Scatter Plot of Total Transaction Counts and Total Transaction Amounts (3 Clusters)</p>
+
+								<p>Since credit card promotions require customers to spend a specified amount for a number of transactions within a stipulated period of time, the team believed the distribution of churn across period of inactivity would yield some insights. 
+									As expected, highest churn is concentrated at 3 months. This could be the stipulated period of promotion that customers need to abide by. 
+									Once the promotion period is over, customers redeem the promotion and cancel the card. </p>
+								<div class="image main"><img src="images/creditcard-11.jpg" alt="" /></div>
+								<p>Figure 10: Churn Distribution Across Months Inactive (over 12 months)</p>
+
+								<p>Total revolving balance refers to the loan balance that carries over on a monthly basis. Since credit cards only require a minimum payment, credit card providers charge a hefty interest rate on the revolving balance. 
+									From the below figure, churn is concentrated at the low and high end of the total revolving balance distribution. 
+									Customers who are signing up for credit cards just to enjoy promotions will not be inclined to keep a high revolving balance and as such, it is expected to see a high concentration of churn at the low end of the distribution. <br>
+									However, it is also interesting to note that there is significant amount of churn at the high end. These could be customers who realise that credit cards might not be for them as they are unable to clear the monthly balance on time and hence incur high interest charges. </p>
+								<div class="image main"><img src="images/creditcard-12.jpg" alt="" /></div>
+								<p>Figure 11: Churn Distribution Across Total Revolving Balance</p>
+
+								<h4>•	Relationships with Credit Card Provider</h4>
+								<p>The number of relationships that customers have with the credit card provider could provide some insight as to why customers churn. the distribution analysis reveals that the highest churn for customers with three relationships with the credit card provider. 
+									The majority of customers have between three to six relationships with the credit card provider. Churn across customers who have four to six relationships with the credit card provider appears to be similar. 
+									Instead of the number of relationships, it might be more useful to look at number of contacts customer has had with the provider.</p>
+								<div class="image main"><img src="images/creditcard-13.jpg" alt="" /></div>
+								<p>Figure 12: Churn Distribution Across Total Relationship Count</p>
+
+								<p>When customer contacts over a 12-month period is analysed, churn is concentrated at 3 counts while lowest churn is at 0 counts. This could be an indication of user difficulties. Customers who have higher contacts could presumably face more issue with their credit card usage or payments. 
+									In this case, it appears that three strikes is all it takes for customers to churn.</p>
+								<div class="image main"><img src="images/creditcard-14.jpg" alt="" /></div>
+								<p>Figure 13: Churn Distribution Across Total Contact Counts (over 12 months)</p>
+
+								<h3>6. Clustering Analysis</h3>
+								<p>To draw insights on the types of customers that are more likely to churn or not churn, we can perform clustering to partition data into groups, such that meaningful clusters based on customer demographics can be derived. 
+									Several clustering algorithms such as (1) Partitional Clustering (2) Hierarchical clustering (3) Density-based clustering.</p>
+
+								<table>
+									<thead>
+									  <tr>
+										<th style = "width:20%">Clustering Algorithm</th>
+										<th style = "width:40%">Advantages</th>
+										<th style = "width:40%">Disadvantages</th>
+									  </tr>
+									</thead>
+									<tbody>
+									  <tr>
+										<td>Partitional Clustering</td>
+										<td>•	Efficiency and ease of use<br>
+											•	Well-suited for large datasets</td>
+										<td>•	Need to specify number of clusters<br>
+											•	Sensitive to where centroids are initialised</td>
+									  </tr>
+									  <tr>
+										<td>Hierarchical Clustering</td>
+										<td>•	Able to visualise using dendrograms<br>
+											•	Easy to interpret results and identify meaningful clusters in dendrograms</td>
+										<td>•	Computationally expensive<br>
+											•	Not well suited for large datasets</td>
+									  </tr>
+									  <tr>
+										<td>Density-Based Clustering</td>
+										<td>•	Able to handle clusters of arbitrary shapes</td>
+										<td>•	Not suitable for datasets with varying densities or for datasets with clusters of similar densities.<br>
+											•	Choice of distance threshold and minimum number of points required to form a cluster can have a significant impact on the results</td>
+									  </tr>
+									</tbody>
+								  </table>
+
+								<p>Partition-based clustering, specifically K-Means clustering, was selected for our analysis due to its superior efficiency when working with large datasets compared to hierarchical clustering methods (Jain, 1999), (Hastie, 2009).
+									To ensure that the chosen number of clusters is optimal for our dataset, we employed the elbow method, which is a commonly used technique for selecting the number of clusters in K-Means clustering (Kassambara, 2017).
+									Additionally, we conducted feature importance analysis to identify the most significant variables that contribute to the clustering process, allowing us to eliminate any variables that do not significantly affect clustering outcomes (Saitta, 2015).</p>
+								
+								<h4>Variable Selection</h4>
+								<p>The K-Means clustering algorithm relies on measuring distances between data points in a multi-dimensional space. Consequently, using non-numeric variables like categorical variables or text data may pose a challenge because the K-Means clustering algorithm calculates the Euclidean distance between data points. 
+									As such, utilizing non-numeric variables in K-Means clustering may produce inaccurate distances and clustering outcomes. <br>
+									The following variables were selection to conduct K-Means clustering.</p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:20%">Column Name</th>
+										<th style = "width:80%">Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>CLIENTNUM</td>
+										<td>Unique identifier for each customer.</td>
+										</tr>
+										<tr>
+										<td>Months_on_book</td>
+										<td>How long customer has been on the books.</td>
+										</tr>
+										<tr>
+										<td>Total_Relationship_Count</td>
+										<td>Total number of relationships customer has with the credit card provider.</td>
+										</tr>
+										<tr>
+										<td>Months_Inactive_12_mon</td>
+										<td>Number of months customer has been inactive in the last twelve months.</td>
+										</tr>
+										<tr>
+										<td>Contacts_Count_12_mon</td>
+										<td>Number of contacts customer has had in the last twelve months.</td>
+										</tr>
+										<tr>
+										<td>Credit_Limit</td>
+										<td>Credit limit of customer.</td>
+										</tr>
+										<tr>
+										<td>Total_Revolving_Bal</td>
+										<td>Total revolving balance of customer.</td>
+										</tr>
+										</tr>
+										<tr>
+										<td>Avg_Open_To_Buy</td>
+										<td>Average open to buy ratio of customer.</td>
+										</tr>		
+										</tr>
+										<tr>
+										<td>Total_Amt_Chng_Q4_Q1</td>
+										<td>Total amount changed from quarter 4 to quarter 1.</td>
+										</tr>		
+										</tr>
+										<tr>
+										<td>Total_Trans_Amt</td>
+										<td>Total transaction amount.</td>
+										</tr>		
+										</tr>
+										<tr>
+										<td>Total_Trans_Ct</td>
+										<td>Total transaction count.</td>
+										</tr>		
+										</tr>
+										<tr>
+										<td>Total_Ct_Chng_Q4_Q1</td>
+										<td>Total count changed from quarter 4 to quarter 1.</td>
+										</tr>		
+										</tr>
+										<tr>
+										<td>Avg_Utilization_Ratio</td>
+										<td>Average utilization ratio of customer.</td>
+										</tr>								
+									</tbody>
+									</table>
+
+								<h4>Selecting Number of Clusters</h4>
+								<p>To select the number of clusters for the optimal configuration, we use the elbow method, which is a widely accepted technique to derive the optimal number of clusters in clustering analysis. 
+									The elbow method entails running the K-Means clustering algorithm for a range of cluster values, typically from 1 to 10, and computing the sum of squared distances from each data point to its assigned centre (known as distortions).<br>
+									We then plot the distortions against the number of clusters, resulting in a graph resembling an arm shape. The elbow point, which marks the point of inflection on the curve, is considered the optimal number of clusters. 
+									By identifying the elbow point, we can find the optimal cluster number and proceed with further analysis accordingly.</p>
+								<div class="image main"><img src="images/creditcard-15.jpg" alt="" /></div>
+								<p>Figure 14: Elbow Method to Determine Optimal K Clusters</p>
+
+								<p>The elbow point is regarded as the best number of clusters because it indicates the stage at which the improvement in clustering performance becomes insufficient to justify the added complexity of using more clusters. 
+									In simpler terms, the elbow method assists us in identifying the point of diminishing returns, at which further cluster additions do not considerably enhance the quality of the clustering outcomes. 
+									From the results, 4 is the optimal number of clusters for our study.</p>
+
+								<h4>Feature Importance Study</h4>
+								<p>Feature importance identifies the variables that are most relevant to the performance of a model. This method can be applied to K-Means clustering to identify the variables that have the most significant impact on the clustering outcome. 
+									In our scenario, we have 12 variables that we will evaluate using f-test to determine their significance. 
+									By selecting the most important variables, we can decrease the data's dimensionality, streamline the clustering process, and enhance the accuracy of the clustering results.</p>
+								
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:80%">Variable Name</th>
+										<th style = "width:20%">F-Score</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>tr_Total_Trans_Amt</td>
+										<td>1620.121692</td>
+										</tr>
+										<tr>
+										<td>tr_Total_Trans_Ct</td>
+										<td>930.0784162</td>
+										</tr>
+										<tr>
+										<td>tr_Credit_Limit</td>
+										<td>752.7024082</td>
+										</tr>
+										<tr>
+										<td>tr_Months_Inactive_12_mon</td>
+										<td>441.8680501</td>
+										</tr>
+										<tr>
+										<td>tr_Avg_Utilization_Ratio</td>
+										<td>333.1792497</td>
+										</tr>
+										<tr>
+										<td>tr_Total_Ct_Chng_Q4_Q1</td>
+										<td>332.8767953</td>
+										</tr>
+										</tr>
+										<tr>
+										<td>tr_Total_Amt_Chng_Q4_Q1</td>
+										<td>296.2277144</td>
+										</tr>		
+										</tr>
+										<tr>
+										<td>tr_Total_Relationship_Count</td>
+										<td>240.9103763</td>
+										</tr>		
+										</tr>
+										<tr>
+										<td>tr_Customer_Age</td>
+										<td>233.0728859</td>
+										</tr>		
+										</tr>
+										<tr>
+										<td>tr_Avg_Open_To_Buy</td>
+										<td>176.9616378</td>
+										</tr>		
+										</tr>
+										<tr>
+										<td>tr_Contacts_Count_12_mon</td>
+										<td>5.773729373</td>
+										</tr>		
+										</tr>
+										<tr>
+										<td>tr_Total_Revolving_Bal</td>
+										<td>0.00082285</td>
+										</tr>								
+									</tbody>
+									</table>
+								
+								<p>We see that tr_Contacts_Count_12mon and tr_Total_Revolving_Bal has low importance as their scores are negligible as compared to the other variables in the clustering. 
+									We remove them to improve the clustering accuracy.</p>
+
+								<h4>Findings & Discussion</h4>
+								<p>To differentiate between clusters with high and low churn rates, we calculate the percentage churn, which is determined by dividing the total number of churners by the total number of customers in the corresponding group.</p>
+
+								<div class="image main"><img src="images/creditcard-16.jpg" alt="" /></div>
+								
+								<p>We can define what is a cluster with a high churn rate to have a percentage churn of above the overall percentage churn of the whole dataset, 0.16. 
+									Consequently, a cluster with a low churn rate would have a percentage churn below the overall percentage churn. 
+									Following the execution of the K-Means clustering algorithm, we discovered that two clusters exhibit a high churn rate, while the other two clusters have a low churn rate.</p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:20%">Cluster Number</th>
+										<th style = "width:20%">Total</th>
+										<th style = "width:20%">Churners</th>
+										<th style = "width:20%">Percentage Churn</th>
+										<th style = "width:20%">High or Low?</th>
+									</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>0</td>
+										<td>1386</td>
+										<td>250</td>
+										<td>0.18</td>
+										<td>High Churn</td>
+										</tr>
+										<tr>
+										<td>1</td>
+										<td>3385</td>
+										<td>1093</td>
+										<td>0.32</td>
+										<td>High Churn</td>
+										</tr>
+										<tr>
+										<td>2</td>
+										<td>4326</td>
+										<td>215</td>
+										<td>0.050</td>
+										<td>Low Churn</td>
+										</tr>
+										<tr>
+										<td>3</td>
+										<td>1030</td>
+										<td>69</td>
+										<td>0.067</td>
+										<td>Low Churn</td>
+										</tr>					
+									</tbody>
+									</table>
+
+								<h3>7. Predictive Modelling</h3>
+								<p>From the cluster analysis conducted, a predictive model will be able to help identify each customer’s cluster’s probability of churning. <br>
+									The team further looked into the methods of predicting whether the customers will belong to which of the aforementioned clusters such that credit card issuers can implement different strategies on the customers at earlier stages to reduce the churn possibilities. 
+									Several methods are being such as (1) Logistic Regression (2) Random Forest (3) Support Vector Machine</p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:20%">Predictive Model</th>
+										<th style = "width:40%">Advantages</th>
+										<th style = "width:40%">Disadvantages</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Logistic Regression</td>
+										<td>•	Easy to interpret and explain the model<br>
+											•	Can handle binary or multi-class classification problems<br>
+											•	Computationally efficient</td>
+										<td>•	Assumes linear relationships between dependent and independent variables<br>
+											•	May not work well for complex datasets with non-linear relationships<br>
+											•	Limited ability to capture interactions between variables</td>
+										</tr>
+										<tr>
+										<td>Random Forest</td>
+										<td>•	Can handle high-dimensional and complex datasets<br>
+											•	Low risk of overfitting (the use of multiple decision trees)<br>
+											•	Non-parametric model, ability to capture complex relationships and interactions</td>
+										<td>•	Computationally expensive for large datasets<br>
+											•	Difficult to interpret and explain the model compared to single decision tree</td>
+										</tr>
+										<tr>
+										<td>Support Vector Machine</td>
+										<td>•	Effective in high-dimensional spaces<br>
+											•	Good at capturing non-linear relationships and interactions<br>
+											•	Low risk of overfitting</td>
+										<td>•	Computationally expensive for large datasets<br>
+											•	Prone to overfitting with noisy datasets<br>
+											•	Difficult to interpret and explain the model</td>
+										</tr>
+									</tbody>
+									</table>
+								
+								
+								<p>Random Forest was selected due to its ability of handling the variation of features, not limited to only linearly correlated variables and it is less prone to overfitting. 
+									It can be used for classification and regression tasks. In addition, it is called "random" because it creates many decision trees by randomly selecting subsets of the data and subsets of the features for each tree. 
+									The algorithm predicts the label of a new data point, where each decision tree in the forest independently predicts the label based on the features of that data point, and the final prediction is based on a majority vote or average of the predictions from all the trees. 
+									It is also known to be able to handle imbalanced data, where one class of the target variable has significantly more samples than another class. <br>
+									During the training process, Random Forest uses a technique called "bagging" (bootstrap aggregation), which involves randomly sampling the training data with replacement to create multiple subsets of data for each decision tree. 
+									By doing so, Random Forest reduces the variance in the model and makes it less prone to overfitting.<br>
+									Additionally, Random Forest uses a technique called "random subspace method" to randomly select a subset of features for each decision tree. 
+									This technique helps to reduce the correlation between the decision trees and increases the diversity in the ensemble, which can lead to better performance.</p>
+								
+								<h4>Model Evaluation</h4>
+								<p>To design a prediction model, the dataset was divided into training and testing datasets, with cut off percentages of 75% and 25% respectively. 
+									The performance of the predictive model can be evaluated by using classification parameter variables, such as: (1) Accuracy, (2) Area under curve (AUC), (3) Specificity, (4) Recall, (5) Precision, (6) F1-score. 
+									To find the performance metrics, a confusion matrix is generated first using the output of the classification results. 
+									The confusion matrix contains four parts: true positive (TP), true negative (TN), false positive (FP), and false negative (FN). The definition of the confusion matrix are: <br>
+									•	True positives (TP): Number of churn customers correctly predicted as true churn.<br>
+									•	True negatives (TN): Number of non-churn customers correctly predicted as non-churn.<br>
+									•	False positives (FP): Number of churn customers incorrectly predicted as non-churn.<br>
+									•	False negatives (FN): Number of non-churn customers incorrectly predicted as churn.</p>
+				
+								<p>To calculate the performance metrics, the following equations are used:</p>
+
+								<div class="image main"><img src="images/creditcard-17.jpg" alt="" /></div>
+
+								<p>Considering our business objective is to reduce the percentage of customer churn by clustering customers based on their characteristics and data, as well as predicting which clusters new customers belong to, and thereby creating tailored solutions to target each cluster.
+									As a business, it is also key to avoid investing resources in customers that have been predicted to be in the wrong cluster to reduce wastage of resources and ensure cost-effectiveness.
+									To achieve this, the team employed mathematical concepts like accuracy, AUC, specificity, recall, precision, and F1 score to evaluate the performance of the predictive model. 
+									In our case study, the team focused more on Specificity and Precision to reduce false positive rate. 
+									This is to ensure that resources are invested only in customers predicted to be in the right cluster.</p>
+
+								<h4>Findings & Discussion</h4>
+								<p>In this model, all categorical and continuous variables in the dataset were used.</p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:20%">Classification</th>
+										<th style = "width:40%">Variables</th>
+									</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Independent</td>
+										<td>•	Customer_Age<br>
+											•	Gender<br>
+											•	Dependent_Count<br>
+											•	Education_Level<br>
+											•	Marital_Status<br>
+											•	Income_Category<br>
+											•	Card_Category<br>
+											•	Months_on_book</td>
+										<td>•	Total_Relationship_Count<br>
+											•	Months_Inactive_12_mon<br>
+											•	Credit_Limit<br>
+											•	Total_Amt_Chng_Q4_Q1<br>
+											•	Total_Trans_Ct<br>
+											•	Total_Ct_Chng_Q4_Q1<br>
+											•	Avg_Utilisation_Ratio</td>
+										</tr>
+										<tr>
+										<td>Dependent</td>
+										<td>Clusters</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<p>The training and testing results for this model is described in Table 8. 
+									The results showed that the accuracy of the predictive model for the training dataset is lower than that of the test dataset, indicating that the model is not overfitted.</p>
+
+								<p>The study of each cluster (e.g. seeking commonalities between users within the same cluster), complemented with the predictive model, enabled team to focus on prominent customer characteristics and propose strategic methods to lower the percentage churn of each cluster. <br>
+									Please refer to ANNEX B to view the ratios describing the variable importance. The significant characteristics revealed for each cluster in the test dataset were: </p>
+
+									<table>
+										<thead>
+											<tr>
+											<th style = "width:20%">Cluster</th>
+											<th style = "width:30%">Percentage Churn</th>
+											<th style = "width:50%">Independent Variables</th>
+										</tr>
+										</thead>
+										<tbody>
+											<tr>
+											<td>0</td>
+											<td>0.18</td>
+											<td>•	Util >= 0.5<br>
+												•	Female<br>
+												•	Credlimbelow3k<br>
+												•	Lessthan$40K</td>
+											</tr>
+											<tr>
+											<td>1</td>
+											<td>0.32</td>
+											<td>•	Util < 0.2 <br>
+												•	Female</td>
+											</tr>
+											<tr>
+											<td>2</td>
+											<td>0.050</td>
+											<td>•	Credlimabove7K<br>
+												•	Util < 0.2<br>
+												•	Male</td>
+											</tr>
+											<tr>
+											<td>3</td>
+											<td>0.067</td>
+											<td>•	Transctabove70<br>
+												•	Relationlessthan3<br>
+												•	Util < 0.2<br>
+												•	Credlimabove7K<br>
+												•	Male</td>
+											</tr>
+										</tbody>
+									</table>
+
+								<h3>8. Proposed Business Strategy</h3>
+								<p>After understanding each cluster’s respective distinct characteristics, the team has chosen 3 clusters to focus on to propose relevant business strategies based on the percentage churn.</p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:20%">Cluster</th>
+										<th style = "width:30%">Profile</th>
+										<th style = "width:50%">Solution Group</th>
+									</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>0</td>
+										<td>Customer Profile 0</td>
+										<td rowspan="2">High Percentage Churn<br>
+											•	Aim to reduce churn possibility on existing customers</td>
+										</tr>
+										<tr>
+										<td>1</td>
+										<td>Customer Profile 1</td>
+										</tr>
+										<tr>
+										<td>2</td>
+										<td>Customer Profile 2</td>
+										<td>Lowest Percentage Churn<br>
+											•	Aim to attract new customers of similar profile</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<h4>Customer Retention Strategy</h4>
+								<h5>1. Profile 0</h5>
+								<p>Customer Profile 0 represents a high churn group with 18% of customers churning.</p>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:30%">Characteristics</th>
+										<th style = "width:70%">Description</th>
+									</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Female Dominant</td>
+										<td>•	73% of this high churn group comprise of females</td>
+										</tr>
+										<tr>
+										<td>Low Credit Limit</td>
+										<td>•	Credit limit is <$3k</td>
+										</tr>
+										<tr>
+										<td>Low relation count with the credit card issuer</td>
+										<td>•	Relation count of 3-4 (i.e other accounts, investments, insurance or other products with the same credit card issuer)</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<h6>Targeted Marketing</h6>
+								<p>If the target customer group consists solely of females, it may be advantageous to tailor the marketing strategy specifically for this gender. By focusing on female-specific needs, preferences, and behaviors, the marketing message can resonate more strongly with the target audience, leading to increased engagement and customer loyalty. 
+									For example, if the product or service being marketed is in the beauty industry, highlighting the product's benefits for a woman's skin type or hair texture can help to generate interest and motivate the target audience to make a purchase.<br>
+									Tailoring marketing efforts for a specific gender also allows for messaging that is more targeted and personalized. 
+									By understanding the unique needs and preferences of the target audience, marketers can create content that speaks directly to them and addresses their specific concerns. This approach can help to build trust and establish a connection with the target audience, leading to increased engagement and customer satisfaction.</p>
+
+								<h6>Increase Credit Limit</h6>
+								<p>Offering flexibility to increase credit limit can be an effective strategy to encourage spending among customers. By allowing customers to have more purchasing power, they may be more likely to make larger transactions and/or make purchases more frequently. 
+									The flexibility to increase credit limit can also help to build customer loyalty by demonstrating trust in the customer's ability to manage their finances responsibly. 
+									This can help to foster a positive relationship between the customer and the credit provider, leading to increased customer satisfaction and retention.</p>
+
+								<h6>Increase Relations</h6>
+								<p>When a customer uses a banking product, it creates an opportunity for the credit card issuer to offer additional products or services that could meet the customer's needs and enhance their overall banking experience. 
+									By offering a range of products and services, the credit card issuer can deepen their relationship with the customer and encourage them to remain within their ecosystem, rather than switching to a competitor. 
+									For example, if a customer has a credit card with a bank, the bank could market other products such as personal loans, mortgages, savings accounts, or investment products to that customer. 
+									This approach can be particularly effective if the additional products are tailored to the customer's needs and preferences, as it can increase the likelihood that the customer will see value in the offerings and choose to stay with the bank.<br>
+									Marketing other banking products can also be a way for the credit card issuer to generate additional revenue streams from their existing customer base. 
+									Cross-selling products to existing customers is generally less costly than acquiring new customers, as the credit card issuer already has a relationship with the customer and has access to their financial data and preferences. <br>
+									Overall, marketing other banking products to existing customers can be a strategic way to deepen customer relationships, increase revenue, and build a loyal customer base.</p>
+
+								<h4>Customer Retention Strategy</h4>
+								<h5>2. Profile 1</h5>
+								<p>Customer Profile 1 represents a high churn group with 32% of customers churning.</p>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:30%">Characteristics</th>
+										<th style = "width:70%">Description</th>
+									</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Not gender specific</td>
+										<td>•	This group could either be male or female</td>
+										</tr>
+										<tr>
+										<td>Low utilisation rate</td>
+										<td>•	Has low utilisation rates with lower than 50 transactions per month</td>
+										</tr>
+										<tr>
+										<td>Relatively lower spending</td>
+										<td>•	Spend less than $500 dollars per month on the credit card</td>
+										</tr>
+										<tr>
+										<td>Relatively lower income</td>
+										<td>•	Earning less than $40k per year</td>
+										</tr>
+									</tbody>
+								</table>
+								<h6>Providing Value</h6>
+								<p>Considering that this group has a lower income, it would be beneficial to offer them greater value by lowering the annual fees associated with the product or service. 
+									By doing so, the offering becomes more affordable and accessible to this particular segment of customers, which could lead to increased customer loyalty and satisfaction. 
+									Additionally, a lower annual fee could make the product or service more competitive and attractive in the market, as it becomes more accessible to a broader customer base.</p>
+								<h6>Incentivise</h6>
+								<p>Providing additional incentives, such as higher miles per dollar, vouchers, or increased cashback, could be an effective way to increase the transaction count of customers. 
+									By providing these incentives, customers are motivated to make more transactions, as they can reap greater benefits from their purchases. 
+									This approach could lead to increased customer engagement, as customers are incentivized to interact more frequently with the product or service. 
+									Additionally, higher transaction counts could translate to increased revenue for the business, as more purchases are being made and more revenue is being generated per customer. 
+									Overall, providing additional incentives can be an effective strategy for increasing customer transaction counts and generating more revenue for the business.</p>
+								<h6>Gender Neutral Marketing</h6>
+								<p>Given that this particular group could include both males and females, it would be wise to implement a gender-neutral marketing strategy. 
+									A gender-neutral approach to marketing would avoid stereotypical gender biases that could potentially alienate or offend either gender. 
+									Instead, the focus should be on emphasizing the product or service's universal benefits and features that would appeal to both genders. 
+									Additionally, gender-neutral marketing can also help to broaden the customer base, as it is inclusive and appealing to a wider range of customers. 
+									This approach can help to increase customer engagement, as customers are more likely to respond positively to messaging that is non-discriminatory and non-exclusionary. 
+									Overall, a gender-neutral marketing strategy is a wise choice when targeting a customer group that includes both males and females.</p>
+
+								<h4>Customer Acquisition Strategy</h4>
+								<h5>1. Profile 2</h5>
+								<p>Customer Profile 2 represents a low churn group with 5% of customers churning.</p>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:30%">Characteristics</th>
+										<th style = "width:70%">Description</th>
+									</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Male Dominant</td>
+										<td>•	83% of this low churn group comprises of males</td>
+										</tr>
+										<tr>
+										<td>High Income</td>
+										<td>•	Has >$80K annual income</td>
+										</tr>
+										<tr>
+										<td>Low Existing Relation Count with Credit Card Issuer</td>
+										<td>•	Existing relation count of 3-4</td>
+										</tr>
+									</tbody>
+								</table>
+								<h6>Cross-Selling Products</h6>
+								<p>The existing customers who have already purchased other products from the credit card issuer are more likely to be receptive to future offerings. 
+									Therefore, the credit card issuer should leverage the data it already has on these customers to identify this profile and then create a targeted marketing campaign to acquire them. 
+									This can be achieved by analyzing the customer data, including their demographic information, purchase history, and financial behavior, to identify the most profitable segments and tailor marketing messages that resonate with them. 
+									By doing so, the credit card issuer can increase the likelihood of retaining existing customers and generating more revenue from them.</p>
+
+								<h6>Targeted Marketing</h6>
+								<p>The marketing strategy should be designed to specifically target high-income male customers. This means that the marketing messages, channels, and campaigns should be tailored to appeal to this specific group. 
+									This could involve using language, imagery, and promotions that resonate with male preferences and interests, as well as selecting advertising channels that are likely to reach this audience.
+									By targeting high-income male customers with a gender-specific marketing strategy, the credit card issuer can increase the effectiveness of its campaigns, as it is more likely to reach and engage with this particular demographic. 
+									This can lead to higher response rates, increased customer acquisition, and ultimately, greater revenue for the credit card issuer.</p>
+
+								<h6>Referral / New Sign Up Programs</h6>
+								<p>Offering referral incentives to existing customers may encourage them to refer potential customers in their network, who are of the same profile. Such referral bonuses could include cash incentives or rewards points. 
+									The credit card issuer could also incentivise the target group to sign up for a credit card, by offering a unique sign-up bonus.</p>
+
+								<h3>9. Closed Looped Solution</h3>
+								<p>A closed-looped ecosystem would be required in order validate the solution models that the team has proposed.<br>
+									The following considerations are key to creating a closed loop solution: <br>
+									(1)	Update the customer groups for existing customers <br>
+									We can re-run the prediction model on existing customers to observe if any customers have switched groups after implementing the recommendations. Understanding the customers who have changed groups would give us insight on the effectiveness of our campaign.<br>
+									(2)	Compare ‘before and after’ credit card data for existing customers <br>
+									For existing customers, we should continue to collect data on their spending habits as per what has been collected in the dataset. The customer’s credit card spending data should be compared before and after the recommendations are implemented. This allows us to conclude whether the recommendation influence customer behaviour. They should be regularly monitored, so adjustments to credit card incentives could be made when necessary.
+									These will give us further insight into how much resources we can expect to allocate to encourage spending and/or lower churn rates or make adjustments to our marketing incentives to better appeal to the customers.
+									By regularly monitoring and refining the predictive model's performance, effective strategies can be developed to retain customers while optimizing resource utilization.  </p>
+
+								<h3>10. Future Work</h3>
+								<h4>Exploring Other Clustering Models</h4>
+								<p>In this project, K-Means clustering was used to segment data. Future work could involve exploring other clustering models that can handle categorical data as well. 
+									One possible option would be to explore Neural Networks, Agglomerative Clustering, and Gaussian Mixture Models. 
+									By considering a range of clustering models, the project can identify the most appropriate technique for segmenting the data and gain new insights into the underlying patterns and trends in the data.</p>
+								<h4>Adjusting the Variables Used in the Predictive Model</h4>
+								<p>In future work, the variables used to develop the predictive model can also be varied to identify the best independent variables that would affect the accuracy of the model. <br>
+									(1)	Reduce the number of variables sampled at each split <br>
+									We could reduce the number of variables considered for each split to introduce more randomness into the model. This could be carried out whenever a split is created in a tree, where a subset of variables are taken and only those variables are considered to be the variable to be split on. 
+									If we consider a smaller subset of variables at each split, the trees are less likely to look the same because it is unlikely that the same variable is available for consideration at each split. <br>		
+									(2)	Rank features based on importance before forwarding to the machine learning model <br>
+									Based on the output from the feature importance study conducted, the independent variables could be divided into important, marginal, and unimportant. Variables considered to be marginal or unimportant could also be omitted from the predictive model. 
+									This may help to reduce noise from the predictive model, improving the performance of the model. </p>
+								<h4>Collecting Additional Variables</h4>
+								<p>In addition, analyses to further understand the optimal independent variables are required to build a more robust, more accurate, faster, less complicated prediction model. 
+									Such a study should cover a larger dataset with additional variables such as:<br>
+									(1)	More attrited customer data count <br>
+									The count of attrited customer instance is only 16% in this current dataset. By increasing the data collection of attrited customer, the dataset will be more balance, allowing the model to cluster them better and allow the credit card issuers to capture more information and insights regarding the reasons of attrition.<br>
+									(2)	Customer Transaction History and Communication Preference <br>
+									Analysis on the customer’s spending patterns, transaction history and communication preferences, will provide insights to the reasons behind their churn, and allow better development of the targeted marketing strategy.<br>
+									(3)	Geographical data – residential location, work location <br>
+									To better understand if any segments or metrics are separated spatially. This would provide additional information for the company to plan different strategic methods targeting different segments.<br>
+									(4)	Demographic data – employment information <br>
+									To provide better clarification about the user, credit card issuers could also assess the users’ employment information such as his job title, and employer name. 
+									This would provide insights into the user’s creditworthiness as well as financial and job stability.</p>
+
+								<p> <br></p>
+								<a href="https://github.com/peacetay/CreditCardChurnAnalysis" class="button">View Scripts Here!</a>					
 								</section>
 
 					</div>

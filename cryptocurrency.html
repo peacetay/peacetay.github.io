@@ -43,9 +43,521 @@
 									of measuring popularity.</p>
 								<p>To extend our scope for a more comprehensive overview, discussions of cryptocurrency on Reddit are also used to complement our 
 									analysis of the general population on a different social media platform.</p>
-								<p> <br></p>
-								<a href="https://github.com/peacetay/CryptocurrencyAnalysis" class="button">Check it Out!</a>					
-							</section>
+								<a href="https://github.com/peacetay/CryptocurrencyAnalysis" class="button">View Scripts Here!</a>					
+								<p><br></p>
+								<h3>1. Dataset</h3>
+								<p>Bitcoin, the first decentralised cryptocurrency built upon the blockchain technology, was introduced in 2009 by an anonymous developer who goes by the name of Satoshi Nakamoto. 
+									With the success of Bitcoin, interest in blockchain technology grew and many cryptocurrencies were created (The Investopedia Team, 2020).
+									The fundamental reason for choosing Bitcoin for this project is because it is the most well-known cryptocurrency and its dominance of the cryptocurrency market capitalization (>50%), which affords Bitcoin a lot of influence over the price behaviour of other coins (Chipolina, 2020). 
+									Therefore, we will use Bitcoin as a proxy study subject for the cryptocurrency market.</p>	
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:20%">Variable</th>
+										<th style = "width:40%">Description</th>
+										<th style = "width:40%">Source</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Bitcoin</td>
+										<td>•	Historical pricing data</td>
+										<td>www.investing.com</td>
+										</tr>
+										<tr>
+										<td>Influencer & Instution Tweets</td>
+										<td>•	Tweets of selected individuals, organizations, and the general population</td>
+										<td>Twitter API, Snscrape</td>
+										</tr>
+										<tr>
+										<td>Bitcoin in Reddit Community</td>
+										<td>•	Posts in Reddit’s Cryptocurrency community</td>
+										<td>Pushshift Reddit API</td>
+										</tr>
+									</tbody>
+									</table>
+								
+								<p>In this project, we chose a list of users (both influencers and institutions) we hypothesize as the most influential regarding cryptocurrency interest on the Twitter social platform. 
+									Tweets and discussions on Reddit by the general population were also considered in this study. </p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:30%">Influencer</th>
+										<th style = "width:70%">Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Elon Musk</td>
+										<td>•	He has ~ 98.9 million followers on Twitter where he influences the crypto market, leading to the coining of the term “Musk Effect”. </td>
+										</tr>
+										<tr>
+										<td>Changpeng Zhao</td>
+										<td>•	Founder of Binance, has ~ 6.4 million followers on Twitter, he has grown to become the largest cryptocurrency exchange for retail investors in the world. </td>
+										</tr>
+										<tr>
+										<td>Nayib Bukele</td>
+										<td>•	The President of El Salvador has ~ 4.0 million followers on Twitter. During his presidency, El Salvador became the first country to accept Bitcoin as legal tender.</td>
+										</tr>
+										<tr>
+										<td>Vitalik Buterin</td>
+										<td>•	The co-founder of Ethereum, has ~ 4.0 million followers on Twitter, where he shares insightful commentaries about crypto and blockchain.</td>
+										</tr>
+										</tbody>
+									</table>
+
+									<table>
+										<thead>
+											<tr>
+											<th style = "width:30%">Institutions</th>
+											<th style = "width:70%">Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+											<td>Bloomberg</td>
+											<td>•	Bloomberg is the global leader in business and financial data, news, and insight.<br>
+												•	Bloomberg is widely followed by institutional, retail investors, and market participants and has a total of 8.3M followers in twitter.</td>
+											</tr>
+											<tr>
+											<td>Goldman Sachs</td>
+											<td>•	It is the first big U.S. bank to offer its wealthy clients access to Bitcoin funds.<br>
+												•	940K followers in Twitter.</td>
+											</tr>
+											<tr>
+										</tbody>
+									</table>
+
+									<table>
+										<thead>
+											<tr>
+											<th style = "width:30%">General Population</th>
+											<th style = "width:70%">Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+											<td>Twitter Tweets</td>
+											<td>•	All tweets about bitcoin from any twitter handler</td>
+											</tr>
+											<tr>
+											<td>Reddit Posts</td>
+											<td>•	All the posts in the bitcoin subreddit which has 4,300,000 members with average of 3,600 active online.</td>
+											</tr>
+											<tr>
+										</tbody>
+									</table>
+
+								<h3>2. Data Processing</h3>
+								<h4>Data Collection</h4>
+								<p>For data collection, our team scrapped an estimated of 10 million tweets from Twitter (over 3 years) using snscrape library and estimated 50,000 Reddit posts (over 3 years) using psaw library, and pushshiftAPI. 
+									To prevent any data bias during the collection of data, no additional filters (only BTC, Bitcoin) were used during scrapping of text for general population and influencers/institution. </p>
+
+								<h4>Pre-Processing</h4>
+								<p>All tweets and posts were pre-processed to ensure relevancy of text and achieve a better result from the analysis. 
+									Our team leveraged on existing libraries such as NLTK, langdetect and Regex to pre-process the tweets. 
+									The pre-processing is conducted in 3 different steps: Context Cleaning, Valid Word and Language Detect. 
+									For Context Cleaning, the strategy was to convert twitter or reddit context words such as RT (retweet), URL, @ (mention) and emojis using Regex to enhance the effectiveness of the sentiment analysis. 
+									For Valid Word, define valid words were defined as words that consist of letters from A-Z and numbers from 0-9, it was also defined that words with more than 2 consecutive repeated letters are invalid and are reduced to 2 (e.g. “funnny” will be converted to “funny”). 
+									Lastly, for Language Detect, tweets that are non-English were removed. </p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:10%">#</th>
+										<th style = "width:50%">Steps</th>
+										<th style = "width:20%">Description</th>
+										<th style = "width:30%">Tools/Library Used</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>1</td>
+										<td>Scraping Twitter and Reddit</td>
+										<td>Scraping documents</td>
+										<td>TwitterSearchScraper, SNScrape, Pushshift Reddit API</td>
+										</tr>
+										<tr>
+										<td>2</td>
+										<td>Filtering Documents</td>
+										<td>Filter tweets related to cryptocurrency</td>
+										<td>Regex</td>
+										</tr>
+										<tr>
+										<tr>
+										<td>3</td>
+										<td>Convert documents to lower case</td>
+										<td>Document cleaning</td>
+										<td>Regex</td>
+										</tr>
+										<tr>
+										<td>4</td>
+										<td>Replace URL, @ Handles and # Hashtags</td>
+										<td>Document cleaning</td>
+										<td>Regex</td>
+										</tr>
+										<tr>
+										<td>5</td>
+										<td>Remove retweets and tweets with <3 words</td>
+										<td>Document cleaning</td>
+										<td>Regex</td>
+										</tr>
+										<tr>
+										<td>6</td>
+										<td>Remove spaces, emojis</td>
+										<td>Document cleaning</td>
+										<td>Regex</td>
+										</tr>
+										<tr>
+										<td>7</td>
+										<td>Remove stopwords and stemming</td>
+										<td>Document cleaning</td>
+										<td>Porter Stemmer</td>
+										</tr>
+										<tr>
+										<td>8</td>
+										<td>Remove punctuations, - and & and repeated letters</td>
+										<td>Valid word checking</td>
+										<td>Regex</td>
+										</tr>
+										<tr>
+										<td>9</td>
+										<td>Valid word checking</td>
+										<td>Valid word checking</td>
+										<td>Regex</td>
+										</tr>
+										<tr>
+										<td>10</td>
+										<td>Check for english tweets</td>
+										<td>Filter English tweets</td>
+										<td>LangDetect</td>
+										</tr>
+									</tbody>
+								</table>									
+
+								<h3>3. Tools and Environment</h3>
+								<p>A set of Python libraries were utilised, in collecting, processing, analysing, and displaying data. The major modules that were used are:<br>
+									•	Snscrape. It is a scraper from Python library that can be used to scrape data through Twitter’s API without any restrictions or request limits. However, not all data can be retrieved using snscrape such as follower’s ids.<br>
+									•	Twitter API. It is a set of programmatic endpoints allow users to scrape various data from twitter.<br>
+									•	Pandas. It is a Python library that utilises the fast and efficient structure of DataFrames with automatic initialisation indexes and offers data alignment.<br>
+									•	Pushshift Reddit API. It was created by the /r/datasets mod team to help provide enhances functionality and search capacilities for searching Reddit comments and submissions. Pushshift Reddit API is used because it can be filtered by timeline.<br>
+									•	NLTK. It is used for analyzing, preprocessing and understanding written text i.e. sentiment analysis.<br>
+									•	Networkx. A Python library for studying graphs and networks.<br>
+									•	Regex. It is used to check if a string contains a specified search pattern.</p>
+
+								<h3>4. Approach</h3>
+								<p>The following sections will describe the approach taken to conduct the below analyses:<br>
+									•	Social Influence<br>
+									•	Topic Modelling<br>
+									•	Sentiment Analysis<br>
+									Two methods were devised to explore correlation between social sentiments, and topic modelling with respect to price changes. Firstly, the relationship between daily price changes and sentiment scores were explored. 
+									Secondly, to investigate the reasons for significant price changes, the following definitions were used to define these extraordinary days for further analysis.</p>
+								<div class="image main"><img src="images/crypto-01.jpg" alt="" /></div>
+								<p>Figure 1: Price Change (%) versus Days (SN)</p>
+
+								<p>•	Price Hike Days: 
+									Days with > +2.5 standard deviation price change from mean (>10%)<br>
+									•	Price Rise Days: 
+									Days with any positive price change (>0%)<br>
+									•	Price Dip Days: 
+									Days with > -2.5 standard deviation price change from mean (< -9.8%)<br>
+									•	Price Drop Days: 
+									Days with any negative price change (<0%) </p>
+
+								<h4>4.1. Social Influence</h4>
+								<p>From the each of the selected four (4) influencers and two (2) institutions identified, 5,000 followers were extracted, resulting in a total of 30,000 follower nodes. 
+									After extracting the number of followers that each of the 30,000 nodes have, the list was sorted in descending order, to identify the top 30 users (based on number of followers). 
+									Another 5,000 followers were extracted from the top 30 users identified, resulting in a total of 180,000 follower nodes. <br>
+									From the nodes obtained, the below proxies will be used to reflect the six (6) influencers’ & institutions’ influence:<br>
+									•	Network Visualisation. The nodes were simplified by removing any nodes with less than 2 degrees, to ensure significant contribution of nodes in the network graph.<br>
+									•	PageRank Centrality. PageRank scores of each of the influencers and institutions were also computed.</p>
+
+								<h4>4.2. Sentiment Analysis</h4>
+								<p>The project attempted to analyse whether sentiment scores of influencers and the general population on social networks (i.e., Twitter and Reddit) are correlated to cryptocurrency prices, and whether it could be regarded as a predictive premise for the increase and/or decrease of cryptocurrency prices. 
+									For the analysis, we will be adopting the use of confusion matrix for the individual influencers, and the strength of correlation between the general population of Twitter and Reddit with the price changes of cryptocurrency.<br>
+									NLTK VADER sentiment analyser was employed to retrieve the compound scores for tweet/post relating to cryptocurrency. 
+									The daily average score for the tweets and posts were used in analysis. For twitter, the respective compounds scores of each of the influencers’ tweets as well as the general population tweets were retrieved. 
+									For reddit, only the scores of the general population’s posts were retrieved. <br>
+									As part of the analysis, individual influencers’ daily tweet compound score was compared with the price change of the day for bitcoin. 
+									The findings were translated to an illustration via a confusion matrix. Regarding price change, two aspects were considered, one aspect where only when there were significant price changes (i.e., hike/dip), and the other aspect considers whenever there was a price change.</p>
+
+								<h4>4.3. Topic Modelling</h4>
+								<p>There exists a possibility that price changes in cryptocurrencies are affected by factors other than public sentiments of the coin. 
+									To further explore what topics are being discussed on days with significant price changes (i.e. Price Hike and Price Dip), Topic Modelling was conducted.
+									After pre-processing was done to obtain tokenized tweets, Latent Dirichlet Allocation (LDA) was applied and Gensim was used to obtain the topics. 
+									After tuning, 10 topics were found to produce the most coherent set of topics, and the top 5 words in each topic were set for the parameters of this model to be printed using WordCloud and matplotlib.pyplot.</p>
+								
+								<h3>5. Results</h3>
+								<p>The following sections will describe the results obtained from the below analyses:<br>
+									•	Social Influence<br>
+									•	Topic Modelling<br>
+									•	Sentiment Analysis</p>
+								
+								<h4>5.1. Social Influence</h4>
+
+								<h5>Network Visualisation</h5>
+								<p>To visualise the number of followers, the simplified list of nodes was used, resulting in the diagram below. </p>
+								<div class="image main"><img src="images/crypto-02.jpg" alt="" /></div>
+								<p>Figure 2: Simplified Network Visualisation using Networkx</p>
+
+								<p>The simplified in-degrees of the six (6) influencers’ & institutions’ were calculated, giving:</p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:40%">Influencers</th>
+										<th style = "width:60%">In-Degree</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Elon Musk</td>
+										<td>470</td>
+										</tr>
+										<tr>
+										<td>Changpeng Zhao</td>
+										<td>616</td>
+										</tr>
+										<tr>
+										<td>Vitalik Buterin</td>
+										<td>302</td>
+										</tr>
+										<tr>
+										<td>Nayib Bukele</td>
+										<td>100</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:40%">Institution</th>
+										<th style = "width:60%">In-Degree</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Bloomberg</td>
+										<td>252</td>
+										</tr>
+										<tr>
+										<td>Goldman Sachs</td>
+										<td>144</td>
+										</tr>
+										<tr>
+									</tbody>
+								</table>	
+								
+								<p>Other nodes with significant resultant in-degree counts (above 100 in-degrees) were also identified:</p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:20%">User_ID</th>
+										<th style = "width:40%">Specialty / Focus</th>
+										<th style = "width:40%">Simplified In-Degrees</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Brass_Statement</td>
+										<td>Defi payment network</td>
+										<td>182</td>
+										</tr>
+										<tr>
+										<td>JoseAMtnzRivera</td>
+										<td>Co-founder of XoloToken</td>
+										<td>102</td>
+										</tr>
+										<tr>
+										<tr>
+										<td>Dontez Akram</td>
+										<td>Entrepreneur</td>
+										<td>112</td>
+										</tr>
+										<tr>
+										<tr>
+										<td>Victor_eth0x</td>
+										<td>Cryptocurrency promoter</td>
+										<td>671</td>
+										</tr>
+										<tr>
+										<tr>
+										<td>AltcoinWorldcom</td>
+										<td>Altcoins promoter</td>
+										<td>251</td>
+										</tr>
+										<tr>
+										<tr>
+										<td>cdntradegrljenn</td>
+										<td>Equity Investor</td>
+										<td>162</td>
+										</tr>
+										<tr>
+									</tbody>
+								</table>									
+
+								<p>From the results obtained, the below observation was made: <br>
+									•	People of similar interests, follow similar accounts.<br>
+									Upon looking into the focus of the nodes with significant simplified in-degree count, it was discovered that they share the same focus: Investing and Cryptocurrency. 
+									This serves to verify that the sampled followers are indeed invested in the cryptocurrency scene or are at least interested in the topic. </p>
+								
+								<h5>Page Rank Centrality</h5>
+								<p>PageRank scores of each of the six (6) influencers & institutions were calculated and visualised in the chart below. </p>
+								<div class="image main"><img src="images/crypto-03.jpg" alt="" /></div>
+								<p>Figure 3: Visualisation of PageRank Scores of Influencers & Institutions</p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:40%">Influencers</th>
+										<th style = "width:60%">PageRank</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Elon Musk</td>
+										<td>98</td>
+										</tr>
+										<tr>
+										<td>Changpeng Zhao</td>
+										<td>6.4</td>
+										</tr>
+										<tr>
+										<td>Vitalik Buterin</td>
+										<td>4</td>
+										</tr>
+										<tr>
+										<td>Nayib Bukele</td>
+										<td>4</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:40%">Institution</th>
+										<th style = "width:60%">PageRank</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Bloomberg</td>
+										<td>8.3</td>
+										</tr>
+										<tr>
+										<td>Goldman Sachs</td>
+										<td>0.94</td>
+										</tr>
+									</tbody>
+								</table>									
+
+								<p>From the results obtained, the following observations were made:<br>
+									•	Elon Musk and ChangPeng Zhao share a similar PageRank score. <br>
+									From limited number of follower nodes sampled, a higher proportion of high-importance followers may have been sampled for ChangPeng Zhao, while a higher proportion of low-importance followers may have been sampled for Elon Musk, resulting in a similar PageRank score. 
+									Higher importance followers are defined as a person with high number of followers, but a low number of following. 
+									
+									•	Bloomberg has the highest PageRank score amongst the six (6) Influencers and Institutions.<br>
+									Out of the group of six (6) chosen for the study, Bloomberg has the highest PageRank score, despite having significantly fewer followers than Elon Musk. This phenomenon can be alluded to the fact that there is no causal relationship between follower count and PageRank scores. 
+									It is possible that more retail investors and speculators tend to follow influencer accounts such as Elon Musk, resulting in a lower PageRank score. 
+									As compared to finance professionals who may tend to follow more important accounts such as new channels and renowned financial institutions such as Bloomberg, resulting in a higher PageRank score. </p>
+
+								<h4>5.2. Sentiment Analysis</h4>
+								<p>For sentiment analysis of influencers and institutions, utilizing the same definition for price hike/dip and price rise/drop, we will use the following confusion matrix for our analysis. 
+									Results between days with significant prices changes vs days with no significant price changes were compared.</p>
+								<div class="image main"><img src="images/crypto-04.jpg" alt="" /></div>
+								<p>Figure 4: Confusion Matrix for Sentiment Analysis</p>
+								
+								<p>With the confusion matrix, we derived each of the influencer’s respective accuracy, precision, recall, and F1 scores. The results are illustrated in table form with visual representation in the figures below. 
+									The recall and F1 scores for Nayib Bukele and Goldman Sachs produced scores of 1 because the sample size of tweets happening during price hike/dip days were too little.</p>
+								<div class="image main"><img src="images/crypto-04a.jpg" alt="" /></div>
+								<p>Figure 5a: Confusion Matrix for Influencers and Institutions</p>
+
+								<div class="image main"><img src="images/crypto-04b.jpg" alt="" /></div>
+								<p>Figure 5b: Confusion Matrix Scores for Influencers and Institutions</p>
+
+								<div class="image main"><img src="images/crypto-05.jpg" alt="" /></div>
+								<p>Figure 6: Precision/Accuracy/Recall/F1-Scores of Influencers and Institutions</p>
+
+								<p>We also wanted to analyse if there were any difference between the sentiments during price hike vs. price dip days. 
+									We found that influencers’ tweets are generally very positive even on price dip days as seen in the figure below. </p>
+
+								<div class="image main"><img src="images/crypto-06a.jpg" alt="" /></div>
+								<p>Figure 7: Compound Score Comparison between Price Hike and Price Dip Days</p>
+
+								<p>To evaluate if there is a correlation between the sentiment of the general population based on their post/tweets from Reddit and Twitter, and if the sentiments could be used to predict price change of Bitcoin, a linear regression model was used. 
+									The results are seen in the figures below. 
+									R-score for twitter general population (rise/drop), twitter general population (hike/dip), reddit general population (rise/drop), and twitter general population (hike/dip) were 0.015, 0.103, 0.001, and 0.041 respectively.</p>
+
+								<div class="image main"><img src="images/crypto-06b.jpg" alt="" /></div>
+								<p>Figure 8: Correlation of Twitter Genpop vs Price Rise/Drop</p>
+
+								<div class="image main"><img src="images/crypto-06c.jpg" alt="" /></div>
+								<p>Figure 9: Correlation of Twitter Genpop vs Price Hike/Dip</p>
+
+								<div class="image main"><img src="images/crypto-06d.jpg" alt="" /></div>
+								<p>Figure 10: Correlation of Reddit Genpop vs Price Rise/Drop</p>
+
+								<div class="image main"><img src="images/crypto-06e.jpg" alt="" /></div>
+								<p>Figure 11: Correlation of Reddit Genpop vs Price Hike/Dip</p>
+
+
+								<h4>5.3. Topic Modelling</h4>
+
+								<p>The topics uncovered during Price Hike and Dip days are largely similar with topics related to Coronavirus, the 2020 United States’ Presidential Election, Markets and China. 
+									This is expected as these topics dominated mainstream media from year 2019 to 2021. 
+									However, several unique topics during days with significant decrease in price were uncovered.</p>
+
+								<div class="image main"><img src="images/crypto-07.jpg" alt="" /></div>
+								<p>Figure 12: Topic Modelling for price hike days (left) and price dip days (right)</p>
+
+								<p>With the discovery of unique topics during days with significant price decrease, it can be concluded that these were the aggravating factors being discussed on social media, that contributed to the decrease in prices of cryptocurrency. 
+									We can infer that in late 2019 and 2020, China-United States trade war was at its height, and market fears spread to crypto-markets which caused the large sell-off and the drop in cryptocurrency prices.</p>
+
+								<h3>6. Discussion of Findings</h3>
+								<h4>Social Influence on Twitter</h4>
+								<p>Through PageRank score calculation, we can see that high number of followers does not equate to a high importance score, using follower counts as weightage. This is because the importance of a Twitter account is dependent on the quality of the followers (i.e. followers with high follower count).
+									This is particularly important for analysing Twitter subjects because it is widely known that Twitter contains fake accounts with very few followers, but high follower count, used to inflate one’s account follower count. (Adetunji, 2022). Similar to the concept of page farming, it is important we consider the quality of followers in Twitter.</p>
+
+								<h4>Sentiment Analysis</h4>
+								<p>Based on the confusion matrix analysis, we can see that there is better accuracy and F1-score between sentiments of crypto-related tweets by influencers/institutions, to explain large changes in Bitcoin prices, as compared to non-significant Bitcoin prices changes. 
+									Hence, the +/-10% approach is a more effective filter for describing large price changes that may be attributed to the influencer’s sentiments on social media.<br>
+									There are also biases found in influencer’s tweets as we can see that their tweets’ compound scores are generally positive even during Price Dip days, which could be attributed due to their possible vested interest in Bitcoin/cryptocurrencies, hence they would still want to tweet positively to try and encourage followers to invest in the coin despite price dips. 
+									Therefore, investors should not depend on so-called “crypto experts” in attempt to predict price changes.<br>
+									Due to the low R-squared value of the linear regression between price change and general population sentiment compound scores of both Twitter and Reddit, we can see that social media sentiments have low correlation with the behaviour of price changes.
+									Hence, it can be concluded that the prediction of Bitcoin price change would not be possible by just analysing the sentiments of the general population.</p>
+
+								<h4>Topic Modelling</h4>
+								<p>Through Topic Modelling, we found that the prices of cryptocurrencies are affected by macroeconomic factors geopolitics, and general market sentiment. 
+									Issues between countries and major economies can add uncertainty in terms of policy direction (i.e. banning of crypto farming) or amount of investments in the alternate investment space. 
+									This was cemented in the discovery of top words of topics in days with significant price decrease related to the year 2019 – 2020 China-United States trade war and recession.
+									This is an interesting finding as the prices of cryptocurrencies are mainly determined only by how much the next person is willing to pay, and it is not grounded in fundamental finance. 
+									However, when the economy faces turmoil and uncertainty, the prices of cryptocurrencies are affected accordingly. 
+									For a new investor entering the cryptocurrency market, this is an important point to note.</p>
+
+								<h3>7. Conclusion & Future Work</h3>
+								<p>To conclude, our analysis shows that there is no causal relationship between the influence of an influencer/institutions and their follower count. 
+									Topics shared on their social media platform might a factor on their influential score. Lastly, no one should attempt to predict price change of bitcoin solely by looking at a one-dimension variable (sentiment of users). 
+									After our analysis, multiple improvements were identified for possible future studies to improve on the results of our findings: <br>
+								<h4>•	Building a Cryptocurrency Sentiment Analyser. </h4>
+									Through our research, we identified that the in-built VADER sentiment analyser from the NLTK library was not able to comprehend cryptocurrencies’ context (to the moon) and acronyms (HODL) and would provide a neutral sentiment score to this text. 
+									To improve the accuracy of the results, a specific sentiment analyser for cryptocurrency should be trained by using labelled tweets and reddit posts. <br>
+									To conclude, our analysis shows that there is no causal relationship between the influence of an influencer/institutions and their follower count. 
+									Topics shared on their social media platform might a factor on their influential score. Lastly, no one should attempt to predict price change of bitcoin solely by looking at a one-dimension variable (sentiment of users). 
+									After our analysis, multiple improvements were identified for possible future studies to improve on the results of our findings:</p>
+								<h5>1.	Building a Cryptocurrency Sentiment Analyser.</h5>
+								<p>Through our research, we identified that the in-built VADER sentiment analyser from the NLTK library was not able to comprehend cryptocurrencies’ context (to the moon) and acronyms (HODL) and would provide a neutral sentiment score to this text. 
+									To improve the accuracy of the results, a specific sentiment analyser for cryptocurrency should be trained by using labelled tweets and reddit posts.</p>
+								<h5>2.	Correlation of Bitcoin and S&P500.</h5>
+								<p>Since there is a significant correlation between Bitcoin and S&P 500 (Fulton, 2022), influencers/institutions such as Jim Cramer or Fed Reserves that possibly have an influence over the S&P500 should be selected for the research to provide different dimension to the analysis. </p>
+								
+								<p><br></p>
+								<a href="https://github.com/peacetay/CryptocurrencyAnalysis" class="button">View Scripts Here!</a>					
+								</section>
 
 					</div>
 

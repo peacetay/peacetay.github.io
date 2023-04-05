@@ -44,8 +44,406 @@
 								<p>(1) What is the extent of the increase in local water supply required to achieve 100% self-sufficiency in water supply by 2060?</p>
 								<p>(2) Which source of local water supply would be most advantageous for Singapore to augment?</p>
 								<p>(3) How will water demand evolve by 2060?</p>
+								<a href="https://github.com/peacetay/SingaporeWaterAnalysis" class="button">View Scripts Here!</a>					
 								<p> <br></p>
-								<a href="https://github.com/peacetay/SingaporeWaterAnalysis" class="button">Check it Out!</a>					
+								<h3>1. Data Sources</h3>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:30%">Variable</th>
+										<th style = "width:40%">Description</th>
+										<th style = "width:30%">Data Source</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Imported Water</td>
+										<td>Water imported by Malaysia</td>
+										<td>mfa.gov.sg</td>
+										</tr>
+										<tr>
+										<td>Local Water Production <br> (Desalination and NEWater)</td>
+										<td>Water supply from existing desalination and NEWater plants</td>
+										<td>authors.library.caltech.edu/78271<br>
+											straitstimes.com<br>
+											pub.gov.sg</td>
+										</tr>
+										<tr>
+										<td>Population Size</td>
+										<td>Historical population size</td>
+										<td>singstat.gov.sg</td>
+										</tr>
+										<tr>
+										<td>Water Sales</td>
+										<td>Historical water sales, by Potable Water, NEWater, and Industrial Water</td>
+										<td>singstat.gov.sg<br>
+											data.gov.sg</td>
+										</tr>
+										<tr>
+										<td>Projected Population Growth Scenarios</td>
+										<td>Different scenarios of population growth of Singapore</td>
+										<td>lkyspp.nus.edu.sg/ips<br>
+											worldpopulationreview.com</td>
+										</tr>
+										<tr>
+										<td>Rainfall</td>
+										<td>Historical total annual rainfall in Singapore</td>
+										<td>data.gov.sg</td>
+										</tr>
+										<tr>
+										<td>Land Area</td>
+										<td>Historical Singapore land area</td>
+										<td>data.gov.sg</td>
+										</tr>
+									</tbody>
+								</table>				
+								<p>Table 1: List of Data Sources</p>
+
+								<h3>2. Influence Diagram & Blackbox Model</h3>
+								<h4>Influence Diagram </h4>
+								<div class="image main"><img src="images/water-01.jpg" alt="" /></div>
+								<p>Figure 1: Influence Diagram for Singapore's Water Self-Sufficiency</p>
+								<h4>Blackbox Model</h4>
+								<div class="image main"><img src="images/water-02.jpg" alt="" /></div>
+								<p>Figure 2: Black Box Model for Singapore's Water Self-Sufficiency</p>
+
+								<h3>3. Model Computations & Assumptions</h3>
+								<h4>Planning Scenarios</h4>
+								<p>Three pre-set scenarios were used in the model to forecast the results: Low, Expected and High, where the decision variables are used to determine the demand for water. The “Main” tab also allows users to vary individual decision variables to explore further.</pr>
+								<p>The variables were determined to simulate the following situations:<br>
+									•	Low Scenario – Low demand, and high supply of water<br>
+									•	Expected Scenario – Expected demand, and expected supply of water<br>
+									•	High Scenario – High demand, and low supply of water</p>
+
+								<h5>Demand Factors:</h5>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:25%"></th>
+										<th style = "width:25%">Low Scenario</th>
+										<th style = "width:25%">Expected Scenario</th>
+										<th style = "width:25%">High Scenario</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Population</td>
+										<td>Low:<br>
+											6,100,000 in 2060</td>
+										<td>High:<br>
+											6%</td>
+										<td>High Effect:<br>
+											110 litres per day per capita in 2060</td>
+										</tr>
+										<tr>
+										<td>Water Tariff (% Increase)</td>
+										<td>Medium:<br>
+											9,600,000 in 2060</td>
+										<td>Medium:<br> 
+											3%</td>										
+										<td>Medium Effect:<br>
+											120 litres per day per capita in 2060</td>
+										</tr>
+										<tr>
+										<td>Conservation Efforts</td>
+										<td>High:<br>
+											11,200,000 in 2060</td>
+										<td>Low:<br>
+											0%</td>
+										<td>Low Effect:<br>
+											130 litres per day per capita in 2060</td>
+										</tr>
+									</tbody>
+								</table>			
+								<p>Table 2: List of Demand Factors and Parameters under Pre-Set Scenarios</p>
+
+								<h5>Supply Factors:</h5>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:25%"></th>
+										<th style = "width:25%">Low Scenario</th>
+										<th style = "width:25%">Expected Scenario</th>
+										<th style = "width:25%">High Scenario</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Rainfall intensity<br>
+											(percentile of historical data)</td>
+										<td>High:<br>
+											75th Percentile</td>
+										<td>Medium:<br>
+											50th Percentile</td>
+										<td>Low:<br>
+											25th Percentile</td>
+										</tr>
+										<tr>
+										<td>Water agreement end date</td>
+										<td>2061</td>
+										<td>2040</td>										
+										<td>2022</td>
+										</tr>
+									</tbody>
+								</table>		
+								<p>Table 3: List of Supply Factors and the Parameters under Pre-Set Scenarios</p>
+
+								<h4>4. Water Demand</h4>
+								<p>The R2 value of the linear relationship between population and the total water demand is 69%. 
+									Therefore, the model uses the total population as the main driver of water demand to predict both domestic and non-domestic water demand in the coming years.</p>
+								<div class="image main"><img src="images/water-03.jpg" alt="" /></div>
+								<p>Figure 3: Existing Population Size (2010-2020), with Forecasted Population Size (2021-2064)</p>
+
+								<h5>4.1. Potable Water Demand</h5>
+								<h6>4.1.1. Domestic Potable Water Demand</h6>
+								<p>Domestic potable water demand is dependent on population growth, water conservation efforts and water tariff. This is computed in the “DD Pot_Water” sheet. 
+									Historical daily domestic water demand per capita is found using Appendix A – Equation 2a.</p>
+
+								<h7>Conservation Efforts</h7>
+								<p>•	In the pre-set scenarios, it was taken that the Singapore government’s target to reduce daily domestic water consumption per capita to 130 litres by 2030 (PUB, n.d.a) is met. 
+									The 2060 target consumption rates for the three pre-set scenarios are arbitrary. Water consumption is assumed to decrease linearly.</p>
+
+								<h7>Increase in Water Tariff</h7>
+								<p>•	Historically, water tariff increases about every 20 years with last two increases in 2018 and 2000. Hence, it is assumed that the next price hike will occur in 2040, with the percentage increase varied for the three pre-set scenarios. 
+									The effect of price change is applied on top of conservation efforts. The adjusted daily, per capita potable water demand is calculated using Appendix A – Equation 3.<br>
+									•	The project assumes price elasticity of demand of water is -0.4 based on a study on US residential water conservation programs (Olmstead and Stavins, 2007); this means that for a 10% increase in price, the demand for potable water will decrease by 4%.</p>
+								
+								<p>Total annual domestic potable water demand is then computed using Appendix A – Equation 2b.</p>
+
+								<h6>4.1.2. Non-Domestic Potable Water Demand</h6>
+								<p>With reference to historical domestic and non-domestic potable water demand, an average ratio of 59% (domestic potable water demand) and 41% (non-domestic potable water demand) is used. 
+									It is assumed economic and population growth are positively correlated; hence this ratio is unchanged till 2060. The daily per capita non-domestic potable water demand is calculated using Appendix A – Equation 4a. 
+									Total annual non-domestic potable water demand is calculated using Appendix A – Equation 4b. </p>
+
+								<h6>4.1.3. Water Reserve</h6>
+								<p>As potable water is a basic survival need, we assume that a reserve is kept as a buffer in the event of sudden termination of imported water supply. 
+									For all three pre-set scenarios, the water reserve is set at 2 months of total potable demand. </p>
+								
+								<h5>4.2. Non-Potable Water Demand</h5>
+								<p>For computation of non-potable water demand, refer to the sheet “DD Water_Total”.<br>
+									In 2020, non-domestic water demand (potable water, industrial water, NEWater) comprised of 51% of the total water demand. According to PUB (n.d.a), the non-domestic sector will consume 70% of total water demand by 2060. 
+									The model adopts this ratio for 2060 and assumes a uniform increase until 2060. The projection of the total water demand as well as the respective domestic and non-domestic water demand uses Appendix A – Equations 5 and 6.<br>
+									As non-potable water demand is derived from the potable water demand, water conservation efforts will also result in reduction of non-potable water demand. PUB also implements water conservation efforts for the non-domestic sector.</p>
+								<h6>4.2.1 Industrial and NEWater Demand</h6>
+								<p>It is assumed that the proportion of industrial and NEWater out of non-domestic non-potable water demand will remain at 16% & 84%. 
+									This ratio is derived from the average of proportions from 2010 to 2020. 
+									This ratio will be used in Appendix A - Equation 7 and 8 to calculate the Industrial Water Demand and NEWater Demand.</p>
+
+								<h4>5. Water Supply</h4>
+								<p>To estimate the total water supply in Singapore, we consider the “Four National Taps” (PUB, n.d.a):- (1) imported waters from Malaysia, (2) desalinated water, (3) NEWater and (4) water from local catchment areas.</p>
+								
+								<h5>5.1. Imported Water</h5>
+								<p>According to the second Water Agreement, the volume of imported raw water is 1.137 * 106 m3/day. It is assumed that Singapore always draws this maximum amount all the time as long as the Water Agreement is active.<br>
+									Each of the three pre-set scenarios assumes a different year of termination of imported water supply. In the LOW pre-set scenario, Malaysia continues to export water to Singapore until 2061 as per the Water Agreement. 
+									The EXPECTED and HIGH pre-set scenarios assume early termination of imported water supply in 2040 and 2022 respectively.</p>
+								
+								<h5>5.2. Desalination Plants</h5>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:25%"></th>
+										<th style = "width:25%">Year Built</th>
+										<th style = "width:25%">Capacity (10<sup>6</sup> m<sup>3</sup>/year)</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>SingSpring Desalination Plant</td>
+										<td>2005</td>
+										<td>49.8</td>
+										</tr>
+										<tr>
+										<td>Tuas South Desalination Plant</td>
+										<td>2013</td>
+										<td>116.25</td>										
+										</tr>
+										<tr>
+										<td>Tuas Desalination Plant</td>
+										<td>2018</td>
+										<td>49.8</td>										
+										</tr>
+										<tr>
+										<td>Marina East Desalination Plant</td>
+										<td>2020</td>
+										<td>49.8</td>										
+										</tr>
+										<tr>
+										<td>Jurong Island Desalination Plant</td>
+										<td>2020</td>
+										<td>49.8</td>										
+										</tr>
+									</tbody>
+								</table>		
+								<p>Table 4: Table of Desalination Plants, their Year Built, and Production Capacity</p>
+
+								<p>Capacity of new desalination plants is estimated to be the average of the three latest plants. It is also assumed that all plants operate at maximum capacity all the time.</p>
+
+								<h5>5.3. NEWater</h5>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:25%"></th>
+										<th style = "width:25%">Year Built</th>
+										<th style = "width:25%">Capacity (10<sup>6</sup> m<sup>3</sup>/year)</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Bedok NEWater Factory</td>
+										<td>2002</td>
+										<td>14.6</td>
+										</tr>
+										<tr>
+										<td>Kranji NEWater Factory</td>
+										<td>2002</td>
+										<td>12.4</td>										
+										</tr>
+										<tr>
+										<td>Seletar NEWater Plant</td>
+										<td>2004</td>
+										<td>Decommissioned</td>										
+										</tr>
+										<tr>
+										<td>Keppel Seghers NEWater Plant</td>
+										<td>2007</td>
+										<td>54</td>										
+										</tr>
+										<tr>
+										<td>Sembcorp NEWater Plant</td>
+										<td>2010</td>
+										<td>83.2</td>										
+										</tr>
+										<tr>
+										<td>BEWG-UESH NEWater Plant</td>
+										<td>2017</td>
+										<td>83.2</td>										
+										</tr>
+									</tbody>
+								</table>		
+								<p>Table 5: Table of NEWater Plants, their Year Built, and Production Capacity</p>
+
+								<p>Capacity of new NEWater plants is estimated to be the average of the three latest plants. It is also assumed that all plants operate at maximum capacity all the time.</p>
+
+								<h5>5.4. Local Water Catchment Areas</h5>
+								<p>Water from the local catchment is computed in the “SS Water_CM” sheet. Water from the local water catchment refers to the amount of rainfall that can be captured and used. The maximum water supply from local catchment is computed considering the total rainfall and catchment land area, using Appendix A – Equation 9. The rainfall intensity is set at the 75th, 50th and 25th percentiles of historical annual rainfall (1982-2021).<br>
+								<h6>Catchment coverage:</h6>
+								<p>	•	Current local catchment area covers 67% of Singapore’s land area, and it is planned to be increased to 90% by 2060 (PUB, 2015; Centre for Liveable Cities, 2019). Catchment coverage is assumed to increase linearly.
+									•	We have also assumed that total land area is constant until 2060 (i.e. no land reclamation).<br></p>
+								<h6>Water loss:</h6>
+								<p>	•	70% due to evapotranspiration (Friedrich et al., 2018) and an additional of 10 % due to seepage (Cotton Catchment Communities, 2011).</p>
+								
+								<h4>6. Demand & Supply Computation</h4>
+								<p>According to the water loop diagram in Figure 4, the demand for domestic and non-domestic potable water are fulfilled by water catchment, imported water and desalination plants. 
+									While the demand for non-potable water (i.e. industrial and NEWater demand) are to be fulfilled by NEWater plants.</p>
+								<div class="image main"><img src="images/water-04.jpg" alt="" /></div>
+								<p>Figure 4: Water Loop Diagram on the Sources of Both Potable and Non-Potable Water</p>
+
+								<p>To determine the number of desalination and NEWater plants to be built by 2060 for Singapore to be self-sufficient, there are several computations as follows:<br>
+								<h5>•	Excess/Shortfall</h5>
+								<p>Excess or shortfall refers to the amount of water left after subtracting water demand from water supply. Excess of water supply is reflected by a positive value, and shortfall a negative value. This is calculated using Appendix A – Equation 10. <br></p>
+								<h5>•	Number of Additional Plants</h5>
+								<p>The supply and demand are divided into potable and non-potable water. When there is a shortfall in water supply as compared to demand, additional desalination and NEWater plants are required to be built to fulfil the demand for potable and non-potable water respectively.</p>
+
+
+								<h4>7. Analysis</h4>
+								<p>Based on the historical record and the forecasted values, both potable and non-potable water demand increases steadily across the years. With this demand, Singapore would need to increase the source of the supply for both potable and non-potable water so that Singapore can be self-sufficient by year 2060.</p>
+								<div class="image main"><img src="images/water-05.jpg" alt="" /></div>
+								<p>Figure 5: Forecasted Total Water Demand with 2 months of Buffer for Reserve</p>
+								<div class="image main"><img src="images/water-06.jpg" alt="" /></div>
+								<p>Figure 6a: Potable Water Demand/Supply (Expected Pre-Set Scenarios)</p>
+								<div class="image main"><img src="images/water-07.jpg" alt="" /></div>
+								<p>Figure 6b: Non-Potable Water Demand/Supply (Expected Pre-Set Scenarios)</p>
+								<p>Figure 6 describes the supply and demand for potable water (left) and non-potable water (right) after building additional desalination and NEWater plants respectively. The red dot in supply indicates the year by which desalination/NEWater plants are required to be built. 
+									The number of additional desalination and NEWater plants that are required for Singapore to be self-sufficient in 2060 for the various pre-set scenarios are summarised as follows.</p>
+			
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:25%">Pre-Set Scenario</th>
+										<th style = "width:25%">Number of Additional Desalination Plants</th>
+										<th style = "width:25%">Desalination Plants Required By Year</th>
+										<th style = "width:25%">Number of Additional NEWater Plants</th>
+										<th style = "width:25%">NEWater Plants Required By Year</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Low Scenario</td>
+										<td>0</td>
+										<td>-</td>
+										<td>3</td>
+										<td>2042,2051,2060</td>
+										</tr>
+										<tr>
+										<td>Expected Scenario</td>
+										<td>3</td>
+										<td>2040, 2051, 2062</td>										
+										<td>6</td>
+										<td>2038, 2044, 2049, 2053, 2056, 2059</td>	
+										</tr>
+										<tr>
+										<td>High Scenario</td>
+										<td>9</td>
+										<td>2022, 2022, 2036 2042, 2047, 2052, 2057, 2061, 2065</td>										
+										<td>9</td>
+										<td>2036, 2041, 2045, 2049, 2052, 2054, 2057, 2059, 2062</td>							
+										</tr>
+									</tbody>
+								</table>									
+								<p>Table 6: Table of Desalination & NEWater Plants, with Required Year under Pre-Set Scenarios</p>
+
+								<p>In the LOW and EXPECTED pre-set scenarios, more NEWater plants are required than desalination plants because non-domestic demand exceeds domestic demand and non-domestic non-potable water demand is fulfilled by NEWater plants.<br>
+									According to Tan and Rawat (2018), NEWater is more energy-efficient and cost-efficient to produce as compared to desalination, meaning that it is more costly to increase potable supply than non-potable supply. 
+									As such, to reduce the cost of ensuring sufficient water supply, more focus should be placed on securing natural potable water sources from the local catchment and reducing potable water consumption. <br>
+									The following trade-off and sensitivity analyses use the EXPECTED pre-set scenario as a base.</p>	
+
+								<h5>7.1. Price Hike Trade Off Analysis</h5>
+								<div class="image main"><img src="images/water-08.jpg" alt="" /></div>
+								<p>Figure 7a: Total Potable Water Demand with Different Rate of Price Hike (0%, 3%, 6%, 9% and 12%)</p>
+								<div class="image main"><img src="images/water-09.jpg" alt="" /></div>
+								<p>Figure 7b: Total Non-Potable Water Demand with Different Rate of Price Hike (0%, 3%, 6%, 9% and 12%)</p>
+
+								<p>The price hike trade-off analysis examines how demand changes with different rates of water tariff increase. Figure 7 shows the effect of a price hike of 0%, 3%, 6%, 9%, 12% in the EXPECTED pre-set scenario. Increasing the water tariff does not significantly affect both potable and non-potable water demand. 
+									This is because water is a necessity, and its demand is price inelastic.</p>
+
+								<h5>7.2. Rainfall Sensitivity Analysis</h5>
+								<p>The rainfall sensitivity analysis studies the impact of different rainfall intensities on the total supply of potable water. 
+									Three cases based on historical annual rainfall are shown: low rainfall at 25th percentile, medium rainfall at 50th percentile, and high rainfall at 75th percentile. <br>
+									Figure 8 shows the demand and supply of potable water with the three rainfall intensity cases under the EXPECTED pre-set scenario where Malaysia’s water agreement ends in 2040. 
+									The intersection between the demand and supply lines indicates the year by which the addition of desalination plant is required. In the case where there is low and medium rainfall, the first desalination plant must be built by 2040 to prevent shortage. This means that if Malaysia terminates imported water supply suddenly, there is a 50% chance Singapore will face potable water shortage. 
+									With high rainfall, new plants are only needed by 2048, giving Singapore more time to prepare and build the required first desalination plant.</p>
+								<div class="image main"><img src="images/water-10.jpg" alt="" /></div>
+								<p>Figure 8: Total potable water demand and supply with different rainfall volume</p>
+
+								<p>The amount of rainfall is a crucial deciding factor in the sufficiency of potable water supply in the event of sudden termination of imported water supply. As such, expansion of catchment area should be one of the key areas of focus.</p>
+
+								<h5>7.3. Water Conservation Efforts Sensitivity Analysis</h5>
+								<div class="image main"><img src="images/water-11.jpg" alt="" /></div>
+								<p>Figure 9a: Total Potable Water Demand with +/-10% from the Conservation Effort Target</p>
+
+								<div class="image main"><img src="images/water-12.jpg" alt="" /></div>
+								<p>Figure 9b: Total Non-Potable Water Demand with +/-10% from the Conservation Effort Target</p>
+
+								<p>The water conservations sensitivity examines how demand changes depending on whether the water conservation targets are not met (target +10%), met (on target) or exceeded (target -10%). 
+									In the EXPECTED pre-set scenario, 10% difference from the target significantly affects potable water demand by around 80 million m3 and non-potable water demand for around 65 million m3 in 2060. 
+									In total, about 145 million m3 can be saved annually if the conservation target is lowered by 10%. 
+									Therefore, it is important for PUB to initiate wide range of conservation efforts plan to encourage prudent water usage and ensure that the targets are met. </p>
+
+								<h4>8. Model Limitation & Future Work</h4>
+								
+								<p>The model has some limitations due to lack of data and some assumptions made to build the model. For a more accurate estimation of additional plants needed to ensure water self-sufficiency, the future work should focus on addressing these limitations:<br>
+									•	The model does not account for fact that potable water can be used for non-potable uses which could result in wastage of excess supply of potable water in some years. However, we note that this is rarely done because the cost of processing non-potable water is less than potable water.<br>
+									•	The model does not account for seasonal fluctuations in rainfall because it uses annual total rainfall. During periods of low rainfall, there may be shortage if there is insufficient water reserve buffer. During high rainfall months, not all rainfall can be collected as there is flooding risk. Seasonal rainfall fluctuations may become more pronounced in the future due to climate change and increase short term uncertainty of supply (NCCS, n.d.).<br>
+									•	The model does not account for capital and operating costs of plants and water processing. In considering when and which plants to build, the Government would also need to account for these cost factors.<br>
+									•	The model also does not account for the possibility of new technologies that can be more efficient (i.e. higher capacity processed per day) and cost-effective in processing water in the future (e.g. nuclear desalination).</p>
+
+								<h4>9. Conclusion</h4>
+								<p>This model allows policy makers to easily test different scenarios and to plan relevant demand-side and supply-sides measures to achieve water self-sufficiency before the termination of Singapore-Malaysia’s imported water agreement. <br>
+									Based on the analysis above, we can conclude that the most direct impact from the termination of Malaysia’s imported water agreement would be on the potable water supply as it contributes 37% of it. To ensure Singapore is self-sufficient on potable water, Singapore must boost supply of the two other sources of potable water. As the current water catchment area is only at 66%, Singapore would need to focus on the expansion of the catchment area to 90% to fully utilize the natural rainfall supply of water. In addition, as the rate of climate change is unpredictable, it is recommended that Singapore expect the worst situation of low rainfall and add on more desalination plants to substantiate the potable water supply. Furthermore, the addition of NEWater plants would ensure that non-domestic water demand does not need to draw from potable water sources as the non-domestic water demand outstrips domestic water demand. <br>
+									This study highlights that Singapore’s ability to self-sufficient in water hinges on the growth of water demand. Therefore, the key to allow Singapore being self-sufficient is to focus on conservation efforts plan to ensure prudent water usage by households and businesses.</p>
+
+								<p> <br></p>
+								<a href="https://github.com/peacetay/SingaporeWaterAnalysis" class="button">View Scripts Here!</a>					
 							</section>
 
 					</div>

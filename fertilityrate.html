@@ -42,8 +42,333 @@
 									We will examine the relationship between each country’s indicators of development such as literacy rates, infant mortality, economic achievements, and fertility rate.</p>
 								<p>An interactive R Shiny app will be designed to see if the trade-off for achieving economic and societal successes, is an incapacitated fertility rate.
 									The application will help policy makers better understand how a country’s level of development can affect their fertility rate, and potentially provide guidance on the necessary actions to prevent a further decline in fertility rate.</p>
-								<p> <br></p>
-								<a href="https://github.com/peacetay/FertilityRateAnalysis" class="button">Check it Out!</a>		
+								<a href="https://github.com/peacetay/FertilityRateAnalysis" class="button">View Scripts Here!</a>		
+								<p><br></p>
+								<h3>1. Dataset</h3>
+								<h4>Data Sources</h4>
+								<p> •	https://ourworldindata.org/ <br>
+									•	https://worldbank.org/ <br>
+									•	https://www.un.org/ <br>
+									•	https://www.imf.org/</p>
+								
+								<h4>Data Description</h4>
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:30%">Variable</th>
+										<th style = "width:30%">Description</th>
+										<th style = "width:40%">How it will be used</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Fertility Rate</td>
+										<td>Total number of children that would be born to each woman</td>
+										<td>To define a country’s fertility rate</td>
+										</tr>
+										<tr>
+										<td>Gross Domestic Product (GDP) per capita</td>
+										<td>National GDP divide by its population (The Investopedia Team, 2022)</td>
+										<td>To define a country’s economic level</td>
+										</tr>
+										<tr>
+										<td>Gross Secondary School Enrolment %</td>
+										<td>Percentage of students of official school age enrolled in secondary school</td>
+										<td>As a proxy of the population’s education rate</td>
+										</tr>
+										<tr>
+										<td>Population Size by Sex and Age Group</td>
+										<td>Population size grouped by gender, by 5-year age groups.</td>
+										<td>To understand whether gender ratios affect population size</td>
+										</tr>
+										<tr>
+										<td>Countries</td>
+										<td>Name of Countries</td>
+										<td>To categorise advanced / emerging and developing countries</td>
+										</tr>
+										<tr>
+										<td>Country Standard ID and Codes</td>
+										<td>List of countries, their associated numeric code, and alpha code</td>
+										<td>To allow for more seamless merging of data frames</td>
+										</tr>
+									</tbody>
+								</table>
+								<p>Table 1: Variables and How It Will be Used</p>
+
+								<h3>2. Data Preparation</h3>
+								<h4> Missing Data </h4>
+								<p>	(1) 25 Countries with missing fertility rates were excluded (Serbia, Andorra, Isle of man etc)<br>
+									(2)	5 Countries with missing GDP per capita were excluded (British Virgin Islands, St.Martin, Isle of man etc)<br>
+									(3)	Countries with missing data for certain years were also excluded for graph visualisation.<br>
+								<h4> Variables </h4>
+									(1) Countries are classified as Advanced Countries, and Emerging and Developing Countries in accordance to International Monetary Fund’s definition (Advocates for International Development, n.d.).</p>
+								<p></p>
+								<h3>3. Assumptions:</h3>
+								<p>(1) Period of data collection (for each year) by different sources are assumed to be identical <br>
+									(2)	Data collected from all countries are accurate <br>
+									(3)	Census data includes all citizens</p>
+
+								<h3>4. Descriptive Statistics</h3>
+								<h4>Overview of Fertility Rates Around the World</h4>
+								<div class="image main"><img src="images/baby-01.jpg" alt="" /></div>
+								<p>Figure 1: Overview of Fertility Rates in the World</p>
+
+								<p>A snapshot of fertility rates in 2019 clearly shows that countries in the Africa Continent have a much higher Fertility Rate as compared to the rest of the world.</p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:25%">Country</th>
+										<th style = "width:25%">Year 1980</th>
+										<th style = "width:25%">Year 2000</th>
+										<th style = "width:25%">Year 2020</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>Singapore</td>
+										<td>1.82</td>
+										<td>1.60</td>
+										<td>1.23</td>
+										</tr>
+										<tr>
+										<td>Ghana</td>
+										<td>6.54</td>
+										<td>4.90</td>
+										<td>3.77</td>
+										</tr>
+									</tbody>
+								</table>
+								<p>Table 2: Summary of Fertility Rates of Singapore and Ghana for 1980, 2000, 2020</p>
+
+								<p>Taking a sample of an advanced country and an emerging and developing country, we can see that Singapore has a much lower fertility rate than Ghana – with both country’s fertility rate decreasing over the years. 
+									This study will explore the correlated factors and attempt to identify trends and show projected rates.</p>
+
+								<h4>4.1. Population Demographics</h4>
+								<div class="image main"><img src="images/baby-02.jpg" alt="" /></div>
+								<p>Figure 2: Population Demographics of Singapore and Ghana in 1980, 2020, and 2050</p>
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:33%">Singapore, 1980</th>
+										<th style = "width:33%">Singapore, 2020</th>
+										<th style = "width:33%">Singapore, 2050</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>104:100</td>
+										<td>113:100</td>
+										<td>113:100</td>
+										</tr>
+									</tbody>
+								</table>
+								<p>Table 3: Male and Female Percentage of Total Population in Singapore in 1980, 2020, and 2050</p>								
+
+								<table>
+									<thead>
+										<tr>
+										<th style = "width:33%">Ghana, 1980</th>
+										<th style = "width:33%">Ghana, 2020</th>
+										<th style = "width:33%">Ghana, 2050</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										<td>100:100</td>
+										<td>104:100</td>
+										<td>104:100</td>
+										</tr>
+									</tbody>
+								</table>
+								<p>Table 4: Male and Female Percentage of Total Population in Ghana in 1980, 2020, and 2050</p>										
+
+								<p>Advanced countries like Singapore are described with constrictive population pyramids (inverted shape with graph tapering in at the bottom) – suggesting that there is a lower mortality rate, decreasing fertility rate (Geographic, n.d.). 
+									This population has smaller percentages of people in the younger age groups.<br>
+									Emerging and developing countries like Ghana are described with expansive population pyramids (broad base and narrow top) – suggesting that the population is young and growing. 
+									This trend also implies that the population does not increase much in total number, due to the possible lack of healthcare, and hence lower average life expectancies in the country (Geographic, n.d.). <br>
+									The population age structure pyramid can be broken down into 3 segments: <br>
+									•	Pre-Reproductive: Birth to Age 14 years. When most females are pre-pubescent.<br>
+									•	Reproductive: Age 15 – 44 years. This age range is known to be a woman’s child-bearing years.<br>
+									•	Post-Reproductive: Age 45 to end of life. These are the years when a woman’s fertility declines.</p>
+								
+								<p>The World Health Organisation says that the natural sex ratio is 105 males to 100 females (Human Rights Watch, n.d.). However, as seen in the tables above, the gender ratio for Singapore is expected to persist at 113 males to 100 females. 
+									In a relatively more conservative society like Singapore, marriage is regarded as a ‘pre-requisite’ for creating a family. 
+									The excess 8% of men will likely remain single and unable to have families. The same may not be observed for a more liberal society.</p>
+
+								<h4>4.2. Developmental Indicators vs Fertility Rates</h4>
+								<h5>4.2.1. GDP per Capita vs Fertility Rates</h5>
+								<div class="image main"><img src="images/baby-03.jpg" alt="" /></div>
+								<p>Figure 3: GDP per capita vs Fertility Rate</p>
+
+								<p>Visualising scatter plot from 1950 to 2019, countries trend towards the left (falling fertility rates) and stop at the range of ~1.5 fertility rate and stagnates there. 
+									Additionally, advanced countries’ GDP per capita continue to increase, and shown in the rising elements in the plot.
+									The key takeaway is that fertility rate will stagnate around 1.5 even as the countries’ standard of living continue to increase. In severe cases, highly advanced countries will drop towards fertility rate of 1. 
+									This is consistent with trends around the world where citizens of Advanced Countries are getting married at a later age, and families prefer to have only 1 or 2 children. </p>
+
+								<h5>4.2.2. Education Rate / Life Expectancy vs Fertility Rates</h5>
+								<div class="image main"><img src="images/baby-04a.jpg" alt="" /></div>
+								<p>Figure 4: Secondary School Enrolment % vs Fertility Rate</p>
+
+								<div class="image main"><img src="images/baby-04b.jpg" alt="" /></div>
+								<p>Figure 5: Life Expectancy vs Fertility Rate</p>
+
+								<p>From 1980 to 2019, similarly to the trend of GDP per capita, fertility rates drop as all countries continue to advance. As school enrolment rate and life expectancy increase, fertility rates drop towards the range of 1.5. 
+									Based on the observation of scatter plot, we can confidently conclude that fertility rates will drop as countries advances, regardless of whether they are advanced or developing.</p>
+
+								<h3>5. Inferential Statistics</h3>
+								<p>We will apply inferential statistical techniques to identify the strength of relationship between developmental indicators and fertility rates.</p>
+								<h4>5.1. Cluster Analysis</h4>
+								<p>K-means clustering technique was employed for this cluster analysis. K-means algorithm tries to minimize the distance of the points in a cluster with their centroid and calculates the distance to assign a point to a cluster. 
+									For this analysis, we will select 2 centres in attempt to identify “Advanced Countries” and “Emerging and Developing Countries” clusters.</p>
+								
+								<h4>5.1.1. GDP per Capita vs Fertility Rate</h4>
+								<div class="image main"><img src="images/baby-06a.jpg" alt="" /></div>
+								<p>Figure 6: Cluster Chart of GDP per Capita vs Fertility Rate</p>
+
+								<p>Two clusters (blue and red) were identified. The blue cluster contains countries with high GDP per capita (e.g. Luxembourg, Switzerland, Singapore). It is observed that these countries have a corresponding low fertility rate. 
+									On the other hand, the red cluster contains countries that are Emerging and Developing, such as Oman, Ghana, and Chad. These countries have high fertility rate but experiences hardship, low GDP per capita. <br>
+									Further analysis shows that countries in the bottom left-hand corner (e.g. South Korea, Moldova) experiences relatively low GDP per capita and low fertility rate. 
+									We can conclude that these countries are in danger of facing an increasingly aging population and weakening economic strength which can lead to lower people willing to invest financially in the country.</p>
+								
+								<h5>5.1.2. Life Expectancy / School Enrolment vs Fertility Rate</h5>
+								<div class="image main"><img src="images/baby-06b.jpg" alt="" /></div>
+								<p>Figure 7: Cluster Chart of Secondary School Enrolment vs Fertility Rate</p>
+								
+								<div class="image main"><img src="images/baby-06c.jpg" alt="" /></div>
+								<p>Figure 8: Cluster Chart of Life Expectancy vs Fertility Rate</p>
+
+								<p>The cluster plot of secondary school enrolment - fertility rate shows a dense blue cluster with sparse red cluster. Countries with low education rate are in the red cluster, while the rest of advanced countries are in the blue cluster. 
+									Although it is notable that even among advanced countries, education rates have great variation. 
+									However, it is interesting to note that there are countries that lie in the intersection of the two clusters (e.g. Egypt, Philippines, Uzbekistan) which have a relatively high education rate, and also relatively high fertility rates. <br>
+									The cluster plot of life expectancy - fertility rate features similar characteristics as the secondary school enrolment - fertility rate cluster plot. 
+									Advanced countries are clustered tightly, as compared to the countries in the red clusters, showing countries with low life expectancy. 
+									These countries such as Ghana, Timor Leste and Pakistan have low life expectancy and a much higher fertility rate, as indicated by the larger distance towards the right-hand side. </p>
+								
+								<h4>5.2. Trend of Fertility Rate</h4>
+								<p>To project fertility rate to year 2050. Linear and exponential regression on a time-series analysis was used, grouped by advanced & emerging economies as a group.<br>
+									The lm function in R was used to obtain both linear and exponential regression’s intercept and gradient respectively.</p>
+								<p>Upon further examining Figure 9, we conclude that the linear projection for emerging economies’ countries is not a good model as the rate of change of fertility rate for emerging countries is large. 
+									As emerging countries tend to develop quickly, fertility rates were decreasing at a much faster than the advanced countries. Using a simple linear model, the obtained projected mean fertility rate of the emerging & developing countries is 0.44 in the year of 2050, which is lower than the projected fertility rate of advanced countries in the same year, at 1.39. 
+									If further years are to be projected, linear regression model would be projecting a negative fertility instead. </p>
+									As emerging countries become advanced over time, we project the rate of change of fertility rate would decrease and tend towards that of advanced countries, plateauing towards a single value. 
+									Therefore, the team has used the exponential regression instead to better represent the projection for fertility rate. Table 5 and Table 6 below represents the values for the projection using linear regression and exponential regression respectively.</p>
+								<div class="image main"><img src="images/baby-07a.jpg" alt="" /></div>
+								<p>Figure 9: Population Projection using Linear Regression</p>
+
+								<div class="image main"><img src="images/baby-07b.jpg" alt="" /></div>
+								<p>Figure 10: Population Projection using Exponential Regression</p>
+
+								<div class="image main"><img src="images/baby-07c.jpg" alt="" /></div>
+								<p>Table 5: Population Projection of Emerging and Developing Countries using Linear Regression</p>
+
+								<div class="image main"><img src="images/baby-07d.jpg" alt="" /></div>
+								<p>Table 6: Population Projection of Emerging and Developing Countries using Exponential Regression</p>
+
+								<p>Exponential regression accounts for the decrease in the rate of change of fertility rate between each subsequent year. It also includes the consideration of improvement of other factors (e.g. GDP per capita, life expectancy, education rate) along the years and assumes that the nation reaches an advanced state eventually.<br>
+									Hence, by using the correct regression model, emerging and developing countries are projected to have fertility rates similar to advanced countries at year 2038. </p>
+								
+								<div class="image main"><img src="images/baby-07e.jpg" alt="" /></div>
+								<p>Table 7: Comparison of fertility rate across countries</p>								
+								
+								<p>From Table 7, the mean of the advanced economies countries’ fertility rate and Singapore’s fertility rate projection values are observed to not have a significant difference between linear and exponential regression.
+									While for emerging & developing countries as well as taking Ghana as example, it is observed they have a much significant differences in fertility rate projection between the linear and exponential regression. Therefore, to have standardised regression on the fertility rate time series projection, exponential regression is chosen to be a better projection gauge for both type of countries and at the same time ensuring that fertility rate do not become negative.</p>
+
+								<h4>5.3. Correlation between Fertility Rate and Identified Factors</h4>
+
+								<p>Pearson correlation is conducted between Fertility and the 3 identified factors across all countries. 
+									The 3 factors are GDP, education rate and life expectancy. Using Pearson’s correlation, we find a moderate negative correlation between GDP per capita and fertility (r = -0.452), 
+									whereas there is a high negative correlation between education rate and fertility (r = -0.842), life expectancy and fertility (r = -0.844).<br>
+									In the R Shiny app, we assess similar correlation factor for individual countries. 
+									For example, we find the highest negative correlation between GDP per capita and fertility in Singapore (r = -0.973) and Japan (r = -0.944) amongst advanced economies. 
+									Cyprus has the highest negative correlation between education rate and fertility (r = -0.889) and life expectancy and fertility (r = -0.948), amongst advanced economies. </p>
+
+								<h4>5.4. Hypothesis Testing</h4>
+								<p>In this segment, hypothesis tests will be conducted at level of significance , α of 5%, to discover whether it can be concluded that advanced countries, and emerging and developing countries have a fertility rate above 2. </p>
+								<h5>Hypotheses:</h5>
+								<h6>•	‘Advanced’ countries have low fertility rate.</h6>
+								<p>		H_0: μ≤2 <br>
+										H_1:μ>2 	where μ is the population mean (fertility rate) of advanced countries. <br>
+										From test results, since the p-value = 1 is more than our alpha value of 0.05, we do not reject the null hypothesis. 
+										We have sufficient evidence that the mean of advanced countries’ fertility rate is less than or equals to 2. 
+										Therefore, we can conclude that advanced countries have lower fertility rate. </p>
+
+								<h6>•	‘Emerging and developing’ countries have high fertility rate.</h6>
+								<p>		H_0: μ≤2 <br>
+										H_1:μ>2 	where μ is the population mean (fertility rate) of ‘emerging and developing’ countries. <br>
+										From test results, since p-value < 2.2e-16 is smaller than our alpha value of 0.05, we reject the null hypothesis. 
+										There is sufficient evidence to conclude that emerging and developing countries have a fertility rate above 2. 
+										Therefore, we can conclude that emerging and developing countries have higher fertility rate.</p>
+								
+								<p>From these hypothesis tests, we can conclude that emerging and developing countries have relatively higher fertility rate compared to advanced countries.</p>
+								
+								<h4>5.5. Linear Regression</h4>
+								<p>The linear regression test is to see whether each factor is significant, in relation with our dependent variable, fertility rate, in advanced and emerging countries.</p>
+								<h5>Hypotheses:</h5>
+								<h6>•	Fertility rate of a country is highly correlated to GDP per capita.</h6>
+								<p>		H_0: Linear regression is not significant <br>
+										H_1: Linear regression is significant<br>
+										From test results, the linear regression for fertility rate with GDP per capita is significant in both types of countries, since the p-value from F statistics is less than 0.05.
+										However, the adjusted R-squared in advanced countries is quite low, around 0.26 in the model.
+										Given this, although the individual coefficients are significant, we cannot conclude that this linear regression model in advanced countries has a level of significance.
+										We can only conclude that this linear regression model for emerging and developing countries is significant.</p>
+								<h6>•	Fertility rate of a country is highly correlated to life expectancy.</h6>
+								<p>		H_0: Linear regression is not significant <br>
+										H_1: Linear regression is significant<br>
+										From test results, the linear regression for fertility rate with life expectancy is significant in both types of countries since the p-value from F statistics is less than 0.05. 
+										Nonetheless, only 34% of the variations on the dependent variable can be explained by the factor of life expectancy, which is quite low. 
+										Thus, we cannot conclude that this linear regression model in advanced countries is significant despite the individual coefficients are significant. 
+										We can only conclude that this linear regression model for emerging and developing countries is significant.</p>
+								<h6>•	Fertility rate of a country is highly correlated to education rate.</h6>
+								<p>		H_0: Linear regression is not significant <br>
+										H_1: Linear regression is significant <br>
+										From test result seen in Figure 18, the linear regression for fertility rate with education rate is significant in both types of countries. 
+										In addition, the individual coefficients are also significant, making a high the adjusted R-squared.</p>
+
+								<h4>5.6. Multi-Linear Regression</h4>
+								<p>To find out which factor (GDP, Life Expectancy, Education) is least significant:<br>
+									•	StepAIC was used to determine the best representation of the independent variables.<br>
+									•	Removal of LifeExp independent variable results in a lower AIC for the multi-linear regression.</p>
+								<p> The removal of independent variable life expectancy has allowed the new multilinear regression to have a better statistical representation.<br>
+									•	Both intercept and both slopes (GDP & Edu) are statistically significant <br>
+									•	The p-values are significant. This linear regression is statically significant<br>
+									From the test results, the adjusted R-squared is at 96.78%. Representing the proportion of the total variation in the dependent variable explained by the variation in the independent variables.</p>
+									
+								<h4>5.7. Chi-Square Testing</h4>
+								<p>Additionally, chi-square tests were conducted to further understand the effect of GDP per capita, life expectancy and level of education on fertility rates across the world.<br>
+									We divide the fertility rate and other three factors into 2x2 table and count how many countries belong to the responding group to execute the Chi-Square test. 
+									The category of the fertility rate is same as what we did in hypothesis test for advanced countries and emerging and developing countries, which is μ≤2  and μ>2.</p>
+								<p>	Chi square test categorisation:<br>
+									•	GDP per capita is based on the average of the world in 2020 (≤$11k and >$11k).<br>
+									•	Education rate is based on the average secondary school enrolment rate around the world (≤85% and >85%).<br>
+									•	Life expectancy is based on the average life expectancy around the world in 2021 (≤70 years old and >70 years old)</p>
+								<h5>Hypotheses:</h5>
+								<h6>•	Does GDP per capita affect fertility rate?</h6>
+								<p>		H_0:  No association exists between GDP and fertility rate<br>
+										H_1: Association exists between GDP and fertility rate<br>
+										From test results, the p-value = 1.361e-08 < α = 0.05, meaning that the GDP per capita is dependent on the fertility rate.</p>
+								<h6>	•	Does level of education of the population affect the fertility rate?</h6>
+								<p>		H_0:  No association exists between the level of education and fertility rate<br>
+										H_1: Association exists between the level of education and fertility rate<br>
+										From test results, the p-value = 0.3388 > α = 0.05, representing that the education rate is not dependent on the fertility rate.</p>
+								<h6>	•	Does Life Expectancy affect the fertility rate?</h6>
+								<p>		H_0:  No association exists between life expectancy and fertility rate<br>
+										H_1: Association exists between life expectancy and fertility rate<br>
+										From test results, the p-value = 0.01605 < α = 0.05, representing that the life expectancy is dependent on the fertility rate.</p>
+
+								<h3>6. Conclusion</h3>
+								<p>Based on the analysis above, it is not conclusive that the factors identified in this study are all negatively correlated to fertility rate, as we found that it differs across countries. 
+									It is also concluded that most advanced countries are experiencing low fertility rates, which would likely lead to an ageing population. <br>
+									From the simple linear regression, it is discovered that for advanced countries: linear regression for GDP per capita and life expectancy was found to be not significant because of the very low R-squared, except for education rate. 
+									For emerging and developing countries, all factors were found to be significant, with GDP per capita being the least significant. 
+									However, when all three factors are looked at together, using a multi-linear regression, the life expectancy of the population is found to have contributed the least to the model. 
+									However, life expectancy is also found to have association with fertility rate, as life expectancy could be dependent on other factors that are relevant. <br>
+									It was also found that education rate and fertility rate have strong linear relationship, but a ‘no association’ outcome was derived from the chi-square test. 
+									This could be due to missing data in the dataset, resulting in an inaccurate test. With sufficient data, the result may differ. <br>
+									This study also serves to allow policy makers to identify, with ease, the country they would like to emulate when making policies and seeking economic growth for their own.</p>
+							<p><br></p>
+							<a href="https://github.com/peacetay/FertilityRateAnalysis" class="button">View Scripts Here!</a>		
 							</section>
 
 					</div>
