@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Real Estate Market Analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Peace's Portfolio</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">Projects</a></li>
+							<li><a href="aboutme.html">About Me</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/peacetay/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/peacetay" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<!-- Post -->
+						<section class="post">
+						</header>
+								<div class="image main"><img src="images/realestate.jpg" alt=""/></div>
+								<h2>Real Estate Market Analysis</h2>
+								<p>This study delves into the intricate relationships between property values and their corresponding planning regions, with a subsequent investigation into the two additional crucial determinants of property prices, namely: </p>
+								<p>(1) the nature of the property itself, categorized into apartments, condominiums, and landed properties, and <br>
+									(2) the tenure type of the property, differentiating between 99-year leasehold and freehold properties. <br>
+									(3) an inquiry into the purchaser profiles will be conducted, aimed at unraveling the market profile for properties with differing tenure types.</p>
+								<a href="https://github.com/peacetay/RealEstateAnalysis" class="button">View Scripts Here!</a>	
+								<p><br></p>
+								<h3>Assumptions:</h3>
+								<p>(1) Data has been cleaned.<br>
+									(2) Consistent with market sentiments, properties whose Tenure is 999 years are classified as Freehold (PropertyGuru, 2021).<br>
+									(3) 'En bloc' developments have been removed from this analysis as outliers. 'En-bloc' is used to refer to property sales where residents collectively agree to sell their homes to a single buyer, typically a developer or the government (Poh, 2019).
+									In addition, the value of transaction is often higher than the resale market value (Poh, 2019).
+									Hence, out of the 26,297 units included in the dataset, 2,726 labelled as “En-bloc” addressees have been removed from this analysis.</p>
+								<p></p>
+								<h3>Findings and Discussions:</h3>
+								<h4>Property Transaction Frequency, and Median Price ($psf) vs Planning Region and Area</h4>
+								<div class="image main"><img src="images/realestate-01.jpeg" alt=""/></div>
+								<p>This chart describes the number of units transacted by region and area and median price per square foot ($psf). <br>
+									•	Size: The larger the size of the rectangles, the higher the transaction frequency of properties in the planning area. <br>
+									•	Color: The darker the green, the higher the median $psf of the transacted properties.<br>
+									This chart will provide insights on the popular planning areas within the planning region, through highlighting the planning areas with the highest amounts of transactions, while also considering the median $psf of each area.</p>
+								<h5>Discussions & Analysis</h5>
+								<h6>1. Properties in the Central Region were generally more expensive. However, the most expensive areas had fewer transactions.</h6>
+								<p>The Central region generally has a darker shade of green, signifying a higher median $psf compared to the other planning regions. The most expensive areas can also be easily identified as, in descending transaction frequencies: - 
+									(1) River Valley, (2) Downtown Core, (3) Newton, (4) Orchard, with River Valley was the most expensive, and most sought after.</p>
+								<h6>2. Properties in Mature Estates were the most popular.</h6>
+								<p>Mature estates are defined as residential areas that are more than 20 years old. Some areas deemed as mature estates are identified using the red boxes. 
+									Comparing the sizes of the rectangles (indicating transaction frequency), the area of mature estates is noticeably larger, compared to that of the non-mature estates (i.e. Yishun, Choa Chu Kang, etc.). 
+									This could be because mature estates typically have better public transport connectivity and amenities as compared to non-mature estates (PropertyGuru, 2021), and are more attractive.
+									Furthermore, mature estates in the Central region were also generally more expensive, indicated by a darker shade of green. <br>
+									It can be concluded that areas such as Geylang, Queenstown, Toa Payoh and Bukit Timah were the most sought-after areas, inferred from its high number of transactions despite its relatively higher median $psf.
+									While median $psf serves as a good indication of the average prices of properties in each area, this chart does not provide any insight regarding how (1) tenure type of properties (freehold vs leasehold) and (2) property types (apartment, condominiums, semi-detached, terrace, bungalows) will affect the $psf. 
+									It is expected that the tenure type and property types are variables that affect the median $psf significantly. The following charts, will present the aforementioned factors to allow for more conclusions to be drawn.</p>
+								<p></p>
+								<h4>Unit Price ($psf) vs Tenure Type, sorted by Property Type, and Planning Region</h4>
+								<div class="image main"><img src="images/realestate-02.jpeg" alt=""/></div>
+								<p>This chart describes the Unit Price ($psf) of the properties transacted vs tenure type, planning region, and property type. <br>
+									This chart will allow further understanding of the market for types of properties across the planning regions in Singapore, enabling comparisons between even the tenure types of the properties - which is one of the factors that could significantly affect property prices. </p>
+								<h5>Discussions & Analysis</h5>
+								<h6>1. Landed Properties: Prices of Freehold properties were higher than Leasehold properties. </h6>
+								<p>Landed properties are defined as Semi-detached, Detached, and Terrace properties. Prices of landed properties that are freehold were higher than those that are leasehold across planning regions, except for landed properties in the North-East region. 
+									It is observed that these landed properties had a similar median $psf regardless of the tenure type. <br>
+									It is noted that North-East region does not have leasehold properties and there were only 37 transacted units in 2018. 
+									This may be attributed to the fact that there is a smaller supply of landed properties in the North-East region.</p>
+								<h6>2. There are no Freehold Executive Condominiums (EC) in the market, and their prices have the smallest range across Planning Regions. </h6>
+								<p>It is noticed that there are no freehold executive condominiums. This is because ECs are public housing and are only privatized 10 years after the Temporary Occupation Permit (TOP) date (PropertyGuru, 2021). 
+									The EC projects are initiatives launched by the Singapore government, in bid to offer locals properties that are affordable and match the standards of private condominiums.<br>
+									The prices of Executive Condominiums are controlled by Housing & Development Board of Singapore, limiting purchasers only to locals, and only to purchasers whose gross monthly income does not exceed $16,000 (Housing & Development Board (HDB), n.d.). 
+									As the market for ECs is only limited to locals, there is no price competition from overseas buyers - this prevents the market price from increasing exponentially.<br>
+									However, there are some outliers observed in North, East, and North-East region. This could be due to owners reselling their property after the minimum occupation period, which is 5 years calculated from the TOP date. 
+									Conversely, income restrictions do not apply in the resale market and could be one of the factors for the observed price variance.<br>
+									The larger variance in price could also be attributed to the age of the property. As the age of the property closes in to 10 years (PropertyGuru, 2021), it is likely that the prices will increase as it is closer to being privatised.</p>
+								<h6>3. Condominiums & Apartments: Prices of Leasehold were higher than Freehold properties.</h6>
+								<p>•	Condominiums <br>
+									The median $psf of leasehold vs freehold condominiums does not follow a fixed pattern across planning regions. 
+									Beyond tenure types affecting condominiums, condominium prices can also vary greatly depending on the development, whether it is a “Mass Market”, “Mid-Market” or “High End” Condominiums (Property Asia Direct, n.d.). 
+									However, this data is not available in the data set. In summary, it can be concluded that there are other factors affecting condominium prices, beyond tenure types.</p>	
+								<p>•	Apartments <br>
+									It is observed that the median $psf for apartments were generally higher in the leasehold category as compared to freehold. Apartments have a lower requirement on the minimum site area at 1,000sqm, with fewer communal spaces and recreational facilities, as opposed to condominiums at 4,000sqm (Urban Redevelopment Authority, n.d.). 
+									Due to its smaller land area, apartments are generally more likely to be located at prime locations (i.e. closer to the MRT stations, shopping centres etc.) and have better accessibility where land is scarce – leading to a higher median $psf. 
+									Furthermore, areas in prime locations are commonly leasehold, which results in leasehold apartments being more costly.<br>
+									Furthermore, the rise of integrated developments in 2018 saw property buyers willing to fork out premium prices for leasehold apartments with connection to shops, amenities and MRT (Businesstimes, 2018). Examples include Park Place Residence at PLQ, Marina One Residences and Wallich Residence at Tanjong Pagar. 
+									Buyers’ preference for convenience as compared to a freehold tenancy is a possible factor for the higher median prices of leasehold apartments.<br>
+									However, this is not the observation for Apartments in the North region. It is noted that there were no new integrated developments in the North area except for North Park Residences (2015), which could skew the data, resulting in freehold apartments in the North being more costly.</p>
+								<h6>4. There are more outliers observed for Condominiums and Apartments, especially in the Central Region, regardless of their Tenure Type. </h6>
+								<p>This could be largely due to condominiums being privately owned and are available for purchase by foreigners, and expats. Foreign professionals typically work in the central regions, where most of the multi-national companies’ offices are located, these professionals are likely to prefer to live in the area for convenience. 
+									In addition, another group of purchasers would be property investors, who would likely purchase properties in the central region due to higher speculated property appreciation. 
+									Thus, driving up the range of prices for condominiums. </p>
+								<p></p>
+								<h4>Transactions vs Planning Region, sorted by Tenure Type, and Purchaser Address</h4>
+								<div class="image main"><img src="images/realestate-03.jpeg" alt=""/></div>
+								<p>This chart describes the transactions for freehold vs leasehold properties, across planning regions in Singapore, broken down into Purchaser Address: - (1) N/A, (2) HDB, and (3) ‘Private’ – buyers who already have an existing private property. The intent of this analysis is to observe any difference in purchasing patterns between buyers who have an existing private property vs those who do not have one.  
+									Purchasers with address indicators ‘N/A’ will herein be referred to as ‘New Homeowners’, ‘HDB’ as ‘HDB Homeowners’, and ‘Private’ as ‘Private Homeowners’. <br>
+								<h5>Discussions & Analysis</h5>
+								<h6>1. Buyers with existing private properties were more likely to purchase freehold properties.</h6>
+								<p>Transactions of leasehold property accounted for 53% of transactions amongst owners of private properties and 75% of transactions amongst HDB Homeowners. A reason for this observation is because leasehold properties are less costly as compared to freehold properties, as shown in Chart 2. <br>
+									Furthermore, upon further examination of the purchaser profiles of freehold properties in the Central region, it is discovered that more than 70% of the transactions were made by Private Homeowners. 
+									The hypothesis is that this group of Private Homeowners, who generally have higher purchasing power, could have purchased the property as a place of residence, or as a second property for investment to collect rental yield. </p>
+								<h6>2. Buyers who could afford to purchase freehold properties preferred properties in the Central Region.</h6>
+								<p>Purchases in the Central region accounted for 64% of all freehold transactions. Broken down into the various purchaser profiles, properties in the Central region accounted for 
+									(1) 80% of freehold transactions amongst New Homeowners, (2) 58% of freehold transactions amongst HDB Homeowners and (3) 64% of freehold transactions amongst Private Homeowners.<br>
+									Upon further scrutiny of the transactions made by New Homeowners, it is observed that most sale types are “New Sales”. 
+									Amongst New Homeowners, freehold transactions only account for 9% of total transacted units. 
+									The hypothesis is that this subset of purchasers are high income households purchasing new properties in prime Central region; they are likely to be statistical outliers compared to the general population.</p>
+								<h6>3. Leasehold properties were more popular than freehold properties, across all regions.</h6>
+								<p>Leasehold properties across all regions are the most popular across the 3 types of purchasers. This could be due to announcements by the Singapore Land Transport Authority regarding the expansion of local MRT connectivity. In 2018, it was known that the Downtown Line and Thomson-East Coast Line was undergoing construction. 
+									This could have led to a higher preference in properties in the North, East, and North-East regions, due to enhanced transport connectivity, with the comparatively lower median $psf.<br>
+									Amongst New Homeowners, 90% of total units transacted were leasehold properties. Of these leasehold property transactions, 47% of units transacted were in the Central region and 29% in the North-East region.<br>
+									Amongst HDB Homeowners, 75% of total units transacted were leasehold properties. Of these leasehold property transactions, 30% of units transacted were in the North-East region and 25% in the Central region.<br>
+									Amongst Private Homeowners, 53% of total units transacted were leasehold properties. Of these leasehold property transactions, 45% of units transacted were in the Central region, and 18% in the East and North-East region each. It is suggested that leasehold properties provide a better rental yield for property investors (Ong, 2021). 
+									Consistent with the first observation where Private Homeowners include investor buyers, the proposition is that this group of buyers may have purchased leasehold properties for investment purposes.</p>
+								<h3>Conclusion:</h3>
+								<h6>1. Freehold properties in Central region were the most exclusive.</h6>
+								<p>Based on the observations made with Chart 2, the median $psf of both leasehold and freehold in Central region (with exception of apartments) were higher than the other regions. 
+									This implies that demand for freehold properties far exceeded its supply in the Central region.<br>
+									Additionally, freehold properties were observed to have a higher median $psf than leasehold properties, across all regions and property types. 
+									</p>
+								<h6>2. Due to the large price difference between freehold and leasehold prices as shown in Chart 2, more people have purchased leasehold properties.</h6>
+								<p>In Chart 3, the observation is that more leasehold properties were purchased in the Central region vis-à-vis freehold units in the East, North-East, North, West regions combined. 
+									This is consistent across all purchaser profiles - New, HDB, and Private Homeowners. 
+									This suggests that, more leasehold properties were purchased due to its relative affordability. <br>
+									However, regardless of tenure type, median $psf or property types, it is observed that Central region was still more popular, this indicates that property location takes precedence over its tenure type. </p>
+								<h6>3. People who purchased their 2nd property preferred leasehold properties, outside the Central region.</h6>
+								<p>It is recognised that the geographical distribution of leasehold purchases differs amongst purchaser profiles. 
+									Leasehold properties in the North-East region were most popular amongst HDB Homeowners, whereas leasehold properties in the Central region were most popular amongst Private and New Homeowners. <br>
+									This observation is consistent with the analysis from Chart 1, where the preference for housing in mature estates was observed. 
+									It can be said that families who purchased leasehold properties in mature estates want to closer to family for childcare support, better transport amenities as well as accessibility to schools. 
+									Another factor could also be due to the large variance between freehold vs leasehold, and the relative affordability of leasehold properties in the North-East and East regions. </p>
+								<p><br></p>
+								<a href="https://github.com/peacetay/RealEstateAnalysis" class="button">View Scripts Here!</a>	
+								</section>
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<section class="split contact">
+						<section class="alt">
+							<h3>Email</h3>
+							<p><a href="peacetay@gmail.com">peacetay@gmail.com</a></p>
+						</section>
+						<section>
+							<h3>Social</h3>
+							<ul class="icons alt">
+								<li><a href="https://www.linkedin.com/in/peacetay/" class="icon brands alt fa-linkedin"><span class="label">Linkedin</span></a></li>
+								<li><a href="https://github.com/peacetay" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+							</ul>
+						</section>
+					</section>
+				</footer>
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
