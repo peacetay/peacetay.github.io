@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Volunteer Management System</title>
+		<title>Loan Default Prediction</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -38,7 +38,13 @@
 								</header>
 								<div class="image main"><img src="images/loan.jpg" alt="" /></div>
 								<h2>Loan Default Prediction</h2>
-								<p>xxxxx</p>
+								<p>Financial institutions often use credit risk classification models to identify the risk of borrowers, to make informed business decisions. 
+									However, such data sets are often highly unbalanced, which can cause a highly biased effect on the classification performance of predictive algorithms. 
+									This is because traditional machine learning models and evaluation metrics assume a balanced data distribution. 
+									There had been many proposed techniques in dealing with classification of unbalanced datasets, one of which is adopting resampling techniques to artificially rebalance binary classification datasets commonly faced in real world problems. 
+									In this paper, we present a study on the performance of using the various methods of resampling using various predictive modelling algorithms, to identify which combination performs the best. 
+									We observed that SMOTE + Boosted Tree Predictive Algorithm produces the best results. 
+									Additionally, the parameters of Boosted Tree were tuned to further improve the model.</p>
 								<a href="https://github.com/peacetay/LoanDefaultPrediction" class="button">View Scripts Here!</a>	
 								<p><br></p>
 
@@ -68,14 +74,13 @@
 
 								<h3>2. Data Preparation</h3>
 								<div class="image main"><img src="images/loan-01.jpg" alt="" /></div>
-
 								<h4>2.1. Data Pre-Processing</h4>
 								<p>Datasets were imported into JMP PRO through their original .csv files. As JMP PRO might interpret data incorrectly, the team primarily focused on modifying data types and modelling types. All 3 datasets (performance, previous loan, and demographics) were combined using the inner-join function based on a common variable (“customerID”) before data cleaning and transformation. By using the inner-join function, customers without loan history and are not present in the demographics file were removed. This paper focused on the customers that are commonly present in all 3 files.<br>
 									For data transformation, variable “referredby” is in identity format, we found that each identity is unique and hence it would not serve a purpose in building a predictive model. Therefore “referredby” was transformed into a binary variable of - 1 if there is a referral and 0 is there is no referral. In addition, “firstduedate” and “firstpaiddate” variable do not serve a purpose if they are being analysed individually, formulas were used to create a binary variable under the condition that if “firstduedate” < “firstpaiddate”, it would represent that the customer has had a late payment. <br>
 									“Longitude_gps” and “latitude_gps” represents the coordinates of where the data of each “customerId” is being recorded. However, it does not represent the customer’s true home location as they might be just visitors where the data are being collected. These two variables would be deemed as irrelevant as they do not reflect the customer’s true home location and maybe biased depending on the data collection locations. Therefore, these two variables were excluded.<br>
-									For data cleaning, imbalanced categorization of data was recoded to allow a better representation of category groups. Multivariate analysis was also carried out to remove highly correlated variables.<br>
-									For full Data Processing and Preparation treatment, refer to Annex: Data Preparation Log Table & Data Transformation Log Table.</p>
-								
+									For data cleaning, imbalanced categorization of data was recoded to allow a better representation of category groups. Multivariate analysis was also carried out to remove highly correlated variables.</p>
+								<div class="image main"><img src="images/loan-02.jpg" alt="" /></div>
+
 								<h3>3. Data Description</h3>
 								<p>Due to different sampling methods used, methods that produced the same number of samples are grouped together in one JMP file while those with different sample sizes are grouped in a different JMP file. Below are the sampling methods mapping to the JMP files that they are saved into. </p>
 								<table>
@@ -114,7 +119,7 @@
 								</table>
 
 								<h3>4. Data Sampling Methods</h3>
-								<div class="image main"><img src="images/loan-02.jpg" alt="" /></div>
+								<div class="image main"><img src="images/loan-02A.jpg" alt="" /></div>
 
 								<h3>5. Predictive Models</h3>
 								<p>Four types of models were built: Logistic Regression, Decision Tree, Bootstrap Forest, and Boosted Tree. The main objective is to classify a customer’s loan application as good or bad, based on previous loan data as well as the customer’s demographic information.</p>
@@ -150,10 +155,11 @@
 									Above and beyond finding the optimal resampling model for loan default prediction, the team attempted to optimise the model by fine-tuning the Boosted Tree parameters . The following techniques were used to reduce overfitting in the Boosted Tree Model:<br>
 									•	Reducing noise<br>
 									•	Pruning</p>
+								<div class="image main"><img src="images/loan-08a.jpg" alt="" /></div>
 
 								<h4>7.2. Removing Noise / Less Importance Variables</h4>
 								<p>To reduce the complexity of the loan default predictive model, the team removed variables which were assessed to be less important. Variables with the lowest G2 values were removed to reduce the complexity of the model. The variables that were removed are ‘Previous Loan Approved Date’ and ‘Previous Loan Term Days’. </p>
-								<div class="image main"><img src="images/loan-08.jpg" alt="" /></div>
+								<div class="image main"><img src="images/loan-08b.jpg" alt="" /></div>
 
 								<h4>7.3. Pruning of Boosted Tree</h4>
 								<p>Pruning is a technique to remove the parts of the Boosted Tree and not allow the model to grow to its full depth. By tuning the model parameters of the Boosted Tree model, we can prevent overfitting. For this study, we adopt ‘Pre-Pruning’ to stop early the growth of the decision tree and tune the following parameters:<br>
