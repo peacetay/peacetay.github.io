@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Singapore Water Analysis</title>
+		<title>Printer Reviews for Customer Insights</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -35,415 +35,244 @@
 						<!-- Post -->
 							<section class="post">
 								</header>
-								<div class="image main"><img src="images/water.jpg" alt="" /></div>
-								<h2>Singapore Water Analysis</h2>
-								<p>The attainment of water self-sufficiency in Singapore before the expiration of the second Water Agreement in 2061 is a pressing imperative.</p>
-								<p>Given that total water demand is projected to double by 2060, this project will examine the potential supply-side measures that can increase the supply from the other three water sources, 
-									while also taking into account the demand factors that affect potable and non-potable water usage in Singapore.</p>
-								<p>The present study will delve into Singapore's water requirements and seek answers to the following questions:</p>
-								<p>(1) What is the extent of the increase in local water supply required to achieve 100% self-sufficiency in water supply by 2060?</p>
-								<p>(2) Which source of local water supply would be most advantageous for Singapore to augment?</p>
-								<p>(3) How will water demand evolve by 2060?</p>
-								<a href="https://github.com/peacetay/SingaporeWaterAnalysis" class="button">View Scripts Here!</a>					
+								<div class="image main"><img src="images/printer.jpg" alt="" /></div>
+								<h2>Printer Reviews for Customer Insights</h2>
+								<p>In the age of online marketplaces, the overwhelming volume of product reviews provides a goldmine of information on customer insights and preferences. 
+									Manufacturers can make use of text analytics to extract valuable insights on product strengths, comparisons against competitors and areas for improvement to benefit themselves and consumers.</p>
+								<p>This study uses sentiment analysis and topic modelling on reviews of 3 major printer brands (HP, Epson and Canon) on Amazon to extract valuable insights with the goal of helping HP regain its status as a market leader in printer products.</p>
+								<p>For this project, we assume the role of consultants hired by HP to do a comparative analysis to extract customer insights about HP’s printer products against its competitors to address the recent erosion of market share (IDC, 2023). Through the unsupervised and supervised techniques, we aim to understand features that customers value (e.g. print quality, customer service) and identify differences in points of satisfaction or dissatisfaction between HP and its competitors to find areas for improvement.</p>								
+
+								<a href="https://github.com/peacetay/PrinterReviews" class="button">View Scripts Here!</a>					
 								<p> <br></p>
 								<h3>1. Data Sources</h3>
+								<p>We have crawled Amazon for customer reviews for a total of 28 printers. 
+									This dataset comprises 15 HP ink printers and 13 Canon/Epson printers which are selected by HP stakeholders. 
+									The reviews collected were primarily from January 1, 2020, through September 10, 2023. 
+									Within this dataset, each product has between 100 to 500 reviews and encompasses ratings spanning from 1 to 5 stars. 
+									On top of the review text, the dataset captures other variables described in 0.</p>
 								<table>
 									<thead>
 										<tr>
-										<th style = "width:30%">Variable</th>
-										<th style = "width:40%">Description</th>
-										<th style = "width:30%">Data Source</th>
+										<th style = "width:40%">Variable</th>
+										<th style = "width:60%">Description</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-										<td>Imported Water</td>
-										<td>Water imported by Malaysia</td>
-										<td>mfa.gov.sg</td>
+										<td>Review Date</td>
+										<td>Review date	The date when customer left the review</td>
 										</tr>
 										<tr>
-										<td>Local Water Production <br> (Desalination and NEWater)</td>
-										<td>Water supply from existing desalination and NEWater plants</td>
-										<td>authors.library.caltech.edu/78271<br>
-											straitstimes.com<br>
-											pub.gov.sg</td>
+										<td>Review Name / Title / Content</td>
+										<td>Detailed review information</td>
 										</tr>
 										<tr>
-										<td>Population Size</td>
-										<td>Historical population size</td>
-										<td>singstat.gov.sg</td>
+										<td>Verified Purchase</td>
+										<td>The presence of a verified purchase or an empty field indicates review authenticity</td>
 										</tr>
 										<tr>
-										<td>Water Sales</td>
-										<td>Historical water sales, by Potable Water, NEWater, and Industrial Water</td>
-										<td>singstat.gov.sg<br>
-											data.gov.sg</td>
+										<td>People_find_helpful</td>
+										<td>Whether the review is VINE VOICE or not
+											(Amazon Vine Voice is a special program where trusted reviewers get early access to free new products for writing review)</td>
 										</tr>
 										<tr>
-										<td>Projected Population Growth Scenarios</td>
-										<td>Different scenarios of population growth of Singapore</td>
-										<td>lkyspp.nus.edu.sg/ips<br>
-											worldpopulationreview.com</td>
+										<td>Price / Rating Count / Overall Rating</td>
+										<td>Pricing/ Total rating count / average rating information for each product</td>
 										</tr>
 										<tr>
-										<td>Rainfall</td>
-										<td>Historical total annual rainfall in Singapore</td>
-										<td>data.gov.sg</td>
-										</tr>
-										<tr>
-										<td>Land Area</td>
-										<td>Historical Singapore land area</td>
-										<td>data.gov.sg</td>
+										<td>Review Model</td>
+										<td>Pricing/ Total rating count / average rating information for each product</td>
 										</tr>
 									</tbody>
 								</table>				
 								<p>Table 1: List of Data Sources</p>
 
-								<h3>2. Influence Diagram & Blackbox Model</h3>
-								<h4>Influence Diagram </h4>
-								<div class="image main"><img src="images/water-01.jpg" alt="" /></div>
-								<p>Figure 1: Influence Diagram for Singapore's Water Self-Sufficiency</p>
-								<h4>Blackbox Model</h4>
-								<div class="image main"><img src="images/water-02.jpg" alt="" /></div>
-								<p>Figure 2: Black Box Model for Singapore's Water Self-Sufficiency</p>
-
-								<h3>3. Model Computations & Assumptions</h3>
-								<h4>Planning Scenarios</h4>
-								<p>Three pre-set scenarios were used in the model to forecast the results: Low, Expected and High, where the decision variables are used to determine the demand for water. The “Main” tab also allows users to vary individual decision variables to explore further.</pr>
-								<p>The variables were determined to simulate the following situations:<br>
-									•	Low Scenario – Low demand, and high supply of water<br>
-									•	Expected Scenario – Expected demand, and expected supply of water<br>
-									•	High Scenario – High demand, and low supply of water</p>
-
-								<h5>Demand Factors:</h5>
-								<table>
-									<thead>
-										<tr>
-										<th style = "width:25%"></th>
-										<th style = "width:25%">Low Scenario</th>
-										<th style = "width:25%">Expected Scenario</th>
-										<th style = "width:25%">High Scenario</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-										<td>Population</td>
-										<td>Low:<br>
-											6,100,000 in 2060</td>
-										<td>High:<br>
-											6%</td>
-										<td>High Effect:<br>
-											110 litres per day per capita in 2060</td>
-										</tr>
-										<tr>
-										<td>Water Tariff (% Increase)</td>
-										<td>Medium:<br>
-											9,600,000 in 2060</td>
-										<td>Medium:<br> 
-											3%</td>										
-										<td>Medium Effect:<br>
-											120 litres per day per capita in 2060</td>
-										</tr>
-										<tr>
-										<td>Conservation Efforts</td>
-										<td>High:<br>
-											11,200,000 in 2060</td>
-										<td>Low:<br>
-											0%</td>
-										<td>Low Effect:<br>
-											130 litres per day per capita in 2060</td>
-										</tr>
-									</tbody>
-								</table>			
-								<p>Table 2: List of Demand Factors and Parameters under Pre-Set Scenarios</p>
-
-								<h5>Supply Factors:</h5>
-								<table>
-									<thead>
-										<tr>
-										<th style = "width:25%"></th>
-										<th style = "width:25%">Low Scenario</th>
-										<th style = "width:25%">Expected Scenario</th>
-										<th style = "width:25%">High Scenario</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-										<td>Rainfall intensity<br>
-											(percentile of historical data)</td>
-										<td>High:<br>
-											75th Percentile</td>
-										<td>Medium:<br>
-											50th Percentile</td>
-										<td>Low:<br>
-											25th Percentile</td>
-										</tr>
-										<tr>
-										<td>Water agreement end date</td>
-										<td>2061</td>
-										<td>2040</td>										
-										<td>2022</td>
-										</tr>
-									</tbody>
-								</table>		
-								<p>Table 3: List of Supply Factors and the Parameters under Pre-Set Scenarios</p>
-
-								<h4>4. Water Demand</h4>
-								<p>The R2 value of the linear relationship between population and the total water demand is 69%. 
-									Therefore, the model uses the total population as the main driver of water demand to predict both domestic and non-domestic water demand in the coming years.</p>
-								<div class="image main"><img src="images/water-03.jpg" alt="" /></div>
-								<p>Figure 3: Existing Population Size (2010-2020), with Forecasted Population Size (2021-2064)</p>
-
-								<h5>4.1. Potable Water Demand</h5>
-								<h6>4.1.1. Domestic Potable Water Demand</h6>
-								<p>Domestic potable water demand is dependent on population growth, water conservation efforts and water tariff. This is computed in the “DD Pot_Water” sheet. 
-									Historical daily domestic water demand per capita is found using Appendix A – Equation 2a.</p>
-
-								<h7>Conservation Efforts</h7>
-								<p>•	In the pre-set scenarios, it was taken that the Singapore government’s target to reduce daily domestic water consumption per capita to 130 litres by 2030 (PUB, n.d.a) is met. 
-									The 2060 target consumption rates for the three pre-set scenarios are arbitrary. Water consumption is assumed to decrease linearly.</p>
-
-								<h7>Increase in Water Tariff</h7>
-								<p>•	Historically, water tariff increases about every 20 years with last two increases in 2018 and 2000. Hence, it is assumed that the next price hike will occur in 2040, with the percentage increase varied for the three pre-set scenarios. 
-									The effect of price change is applied on top of conservation efforts. The adjusted daily, per capita potable water demand is calculated using Appendix A – Equation 3.<br>
-									•	The project assumes price elasticity of demand of water is -0.4 based on a study on US residential water conservation programs (Olmstead and Stavins, 2007); this means that for a 10% increase in price, the demand for potable water will decrease by 4%.</p>
+								<h3>2. Methodology</h3>
+								<h4>Procedure & Solution Details</h4>
+								<div class="image main"><img src="images/printer-01.jpg" alt="" /></div>
+								<p>Figure 1: Solution Approach</p>
+								<p>First, we define the problem and set goals to guide the study, then collect review data. Text Pre-Processing is required to get better outputs from subsequent analysis steps. 
+									Exploratory Data Analysis uncovers initial trends. 
+									Topic Modelling is performed to summarise aspects of customer concerns, followed by building a Sentiment Analysis model for understanding customer sentiments in unlabelled texts. 
+									Lastly, we built a Document Retrieval interface for HP's internal stakeholders to easily view individual reviews that match their specific needs. 
+									This systematic approach (Figure 1) enables a thorough understanding of customer feedback and shapes informed decisions for product development and customer satisfaction enhancement.</p>
 								
-								<p>Total annual domestic potable water demand is then computed using Appendix A – Equation 2b.</p>
-
-								<h6>4.1.2. Non-Domestic Potable Water Demand</h6>
-								<p>With reference to historical domestic and non-domestic potable water demand, an average ratio of 59% (domestic potable water demand) and 41% (non-domestic potable water demand) is used. 
-									It is assumed economic and population growth are positively correlated; hence this ratio is unchanged till 2060. The daily per capita non-domestic potable water demand is calculated using Appendix A – Equation 4a. 
-									Total annual non-domestic potable water demand is calculated using Appendix A – Equation 4b. </p>
-
-								<h6>4.1.3. Water Reserve</h6>
-								<p>As potable water is a basic survival need, we assume that a reserve is kept as a buffer in the event of sudden termination of imported water supply. 
-									For all three pre-set scenarios, the water reserve is set at 2 months of total potable demand. </p>
+								<h3>3. Data Preparation & Exploratory Data Analysis</h3>
+								<h4>Data Preparation</h4>
+								<p>The following pre-processing steps were performed: lower casing, punctuation removal, stop words removal, spelling correction and Porter stemming. 
+									In addition, the 10 most common words and words that only appear once in the corpus were removed since these are not informative. The pyspellchecker package was used to correct common spelling mistakes. 
+									Keywords specific to the corpus (e.g. brand and model names) were added to ensure these were not changed. </p>
 								
-								<h5>4.2. Non-Potable Water Demand</h5>
-								<p>For computation of non-potable water demand, refer to the sheet “DD Water_Total”.<br>
-									In 2020, non-domestic water demand (potable water, industrial water, NEWater) comprised of 51% of the total water demand. According to PUB (n.d.a), the non-domestic sector will consume 70% of total water demand by 2060. 
-									The model adopts this ratio for 2060 and assumes a uniform increase until 2060. The projection of the total water demand as well as the respective domestic and non-domestic water demand uses Appendix A – Equations 5 and 6.<br>
-									As non-potable water demand is derived from the potable water demand, water conservation efforts will also result in reduction of non-potable water demand. PUB also implements water conservation efforts for the non-domestic sector.</p>
-								<h6>4.2.1 Industrial and NEWater Demand</h6>
-								<p>It is assumed that the proportion of industrial and NEWater out of non-domestic non-potable water demand will remain at 16% & 84%. 
-									This ratio is derived from the average of proportions from 2010 to 2020. 
-									This ratio will be used in Appendix A - Equation 7 and 8 to calculate the Industrial Water Demand and NEWater Demand.</p>
+								<h4>Exploratory Data Analysis</h4>
+								<p>All printer models had positive average overall ratings above 4.0 stars. 
+									Reviews tended towards extremes with higher proportion of reviewers giving 1- or 5-star reviews (Figure 4 1). 
+									In addition, negative reviews tended to be longer than positive reviews (Figure 4 2); dissatisfied customers tended to give detailed explanations of problems encountered. 
+									As seen in Figure 4 3, Epson's reviews were the most dichotomized with higher proportions of both 1 and 5-star reviews. 
+									These contrasting evaluations underscore the challenges of catering to diverse customer needs, where not every product can meet the unique needs and expectations of every consumer. 
+									These findings underscore the importance of addressing negative feedback and continuously striving for product improvement in a competitive marketplace. 
+									In the realm of popular vocabulary analysis, terms such as “work”, “time”, “connect” and “cartridge” emerged as frequent favorites, echoing the key aspects consumers prioritize when evaluating printers (Figure 4 4). 
+									This intriguing landscape of discoveries sets the stage for our subsequent experiments, where we delve deeper into the intricacies of topic modelling and sentiment analysis. 
+									These advanced techniques are poised to unveil even more insights into the scenarios we are about to explore, providing a robust foundation for shaping product development and elevating customer satisfaction through data-driven decision-making.</p>
+								<div class="image main"><img src="images/printer-02.jpg" alt="" /></div>
+								<p>Figure 2: Review Rating Distribution</p>
+								<div class="image main"><img src="images/printer-03.jpg" alt="" /></div>
+								<p>Figure 3: Average Number of Tokenised Words by Rating</p>
+								<div class="image main"><img src="images/printer-04.jpg" alt="" /></div>
+								<p>Figure 4: Percentage of Reviews (by Brand and Rating)</p>
+								<div class="image main"><img src="images/printer-05.jpg" alt="" /></div>
+								<p>Figure 5: Overall Review Vocabulary</p>
 
-								<h4>5. Water Supply</h4>
-								<p>To estimate the total water supply in Singapore, we consider the “Four National Taps” (PUB, n.d.a):- (1) imported waters from Malaysia, (2) desalinated water, (3) NEWater and (4) water from local catchment areas.</p>
+								<h3>4. Experiments</h3>
+								<h5>Topic Modelling</h5>
+								<p>Latent Dirichlet Allocation (LDA) was used to perform topic modelling. 
+									A new list of stop words was derived through trail-and-error to remove words that did not contribute to the meaning of the topics, especially subjective words like “love” or “horrible”. 
+									Some common words previously removed were added back in for added clarity (e.g. “ink”).</p>
+								<p>We attempted to use Umass coherence score to determine the optimum number of topics because it is based on co-occurrence statistics within the corpus rather than an external reference corpus (Mimno et al., 2011). 
+									However, topics derived from optimal Umass were not necessarily more coherent, so human evaluation was eventually used to decide the number of topics and hyperparameters of alpha and eta. 
+									The final model used alpha=5, eta=0.1 and k=5.</p>
+								<h5>Sentiment Analysis</h5>
+								<p>We attempted sentiment analysis with TextBlob and VADER (Valence Aware Dictionary and sEntiment Reasoner), which are lexicon- and rule-based methods. 
+									Both methods output a score indicating polarity of a review with a positive score meaning a more positive sentiment and a negative score meaning that the review is likely to be negative. 
+									A score that is close to or equal to zero would mean the sentiment is neutral. 
+									Review ratings are used as the ground truth to determine whether a review is positive, neutral, or negative to compare accuracy of each method. </p>
+
+								<h4>5. Results and Analyses</h4>
+								<h5>Topic Modelling</h5>
+								<p>In this part of the project, we explore the topics discussed in product reviews through LDA. 
+									We further dissect these topics by brand and rating, allowing us to uncover aspects for improvement or positive features highlighted by customers. 
+									The 5 topics identified are as follows (see Figure 6 for word clouds): [Topic 0] Print issues, [Topic 1] Support and returns, [Topic 2] Print and scan quality, [Topic 3] Setup and connecting, [Topic 4] Cartridge replacement.</p>
+								<div class="image main"><img src="images/printer-06.jpg" alt="" /></div>
+								<p>Figure 6: Word Cloud Topics</p>
+
+								<h6>Overall</h6>
+								<p>The dominant topic of a document is the topic with the highest probability in the document’s topic probability distribution. 
+									Overall, the dominant topics are evenly distributed across the 5 topics (see Figure B 2). </p>
+								<div class="image main"><img src="images/printer-07.jpg" alt="" /></div>
+								<p>Figure 7: Overall Topic Distribution</p>
+
+								<h6>By Rating and Brand</h6>
+								<p>The topics were closely related to rating (see Figure 8). 1- and 2-star reviews frequently mentioned “print issues” and “support and returns”. 
+									These two topics are inherently negative as they respectively indicate a failure in the product’s core function and the problems faced by the customer. 
+									On the other hand, “print and scan quality” was more commonly associated with positive reviews. </p>
+								<p>The “support and returns” topic alone does not tell us what problems drove the customer to seek technical support or return the product, so we found the second-most dominant topics for negative reviews with “support and returns” as the dominant topic (Figure 9). 
+									“Print issues” were less prominent for HP’s products, but HP had the highest proportion of “setup and connection” issues among the 3 brands. 
+									This could indicate a larger issue where customers could not even set it up to have print issues subsequently. “Cartridge replacement” was also a common concern that customers sought technical support for. 
+									Their ink subscription programme “HP Instant Ink” may not be user friendly enough.</p>
+								<div class="image main"><img src="images/printer-08.jpg" alt="" /></div>
+								<p>Figure 8: Overall Distribution of Dominant Topics by Rating</p>
+								<div class="image main"><img src="images/printer-09.jpg" alt="" /></div>
+								<p>Figure 9: 2nd Dominant Topic Distribution for "Support and Returns"</p>
+
+								<p>There was a significant difference in the topic distribution across brands (see Figure 10). 
+									The dominant topic was equally distributed among the 5 topics for HP. 
+									Along with HP’s wide range of products across different price points, we can infer that HP’s strategy is to be an all-rounder that meets different needs. 
+									Epson and Canon had an uneven distribution topic. From the high proportion of good reviews about print quality and higher priced products, Epson is likely the market in higher-end printers. Canon had a high proportion of “setup and connecting” and low proportion of “cartridge replacement”. 
+									Based on the price point of their products, they likely target budget-conscious buyers.</p>
+								<p>HP’s strategy as an all-rounder has served well in the past to get a large customer base. However, to regain its position as the market leader, HP may need to differentiate its product more from its competitors. 
+									HP had the highest proportion of positive reviews about “cartridge replacement” (Figure 11), indicating that HP may have an advantage in the ink subscription space. 
+									This could be a differentiating point over its competitors. Given that it was also often a point of contention for unhappy customers, HP will need to improve the use¬¬r experience for it to boost sales.</p>
+
+								<div class="image main"><img src="images/printer-10.jpg" alt="" /></div>
+								<p>Figure 10: Overall Distribution of Dominant Topics by Brand</p>								
+								<div class="image main"><img src="images/printer-11.jpg" alt="" /></div>
+								<p>Figure 11: Dominant Topics in Positive Reviews by Brand</p>
+
+								<h5>Sentiment Analysis</h5>
+								<p>In this phase, we categorized sentiments into positive, neutral, and negative groups by using compound score to discern and quantify the emotional tone within reviews. 
+									The trained model is intended to be applied to text data from other sources that do not have sentiment labels (e.g. social media comments, HP’s customer feedback channels etc). </p>
 								
-								<h5>5.1. Imported Water</h5>
-								<p>According to the second Water Agreement, the volume of imported raw water is 1.137 * 106 m3/day. It is assumed that Singapore always draws this maximum amount all the time as long as the Water Agreement is active.<br>
-									Each of the three pre-set scenarios assumes a different year of termination of imported water supply. In the LOW pre-set scenario, Malaysia continues to export water to Singapore until 2061 as per the Water Agreement. 
-									The EXPECTED and HIGH pre-set scenarios assume early termination of imported water supply in 2040 and 2022 respectively.</p>
+								<h6>Model Accuracy</h6>
+								<p>Overall, the lexicon and rule-based model VADER was slightly more accurate than the lexicon-based TextBlob method. 
+									The increased accuracy is likely due to VADER’s rules to identify negation and contrastive words (Hutto & Gilbert, 2014). 
+									F1 scores for positive reviews were higher than for negative or neutral reviews in both models (Figure 12), likely because positive reviews tend to be shorter. 
+									However, the overall accuracy of both models was less than ideal, with VADER being slightly higher at 61% compared to TextBlob. 
+									This could be because the length of customer reviews is generally long (average of at least 25 words). 
+									As the sentiments are generated at word level and subsequently used to compute the compound score of the review, long reviews with mixed sentiments could have resulted in less accurate compound scores. 
+									Although the low recall scores for positive reviews showed that many positive reviews were misclassified as negative or neutral, this could be acceptable as we are more concerned about points of dissatisfaction. 
+									As noted earlier, reviewers tend to be more vocal about negative opinions so there may be mismatch when the rating considers positive points not mentioned in the text (Maks & Vossen, 2013). 
+									The VADER model was used to further analyse sentiments across topics as it was slightly more accurate.</p>
+								<div class="image main"><img src="images/printer-12.jpg" alt="" /></div>
+								<p>Figure 12: Classification Reports</p>
+
+								<h6>Overall Sentiments</h6>
+								<p>On the whole, Epson had the highest percentage of positive sentiments, followed very closely by HP and then Canon. 
+									The order was reversed for negative sentiments with Canon as the highest and Epson as the lowest (Figure 13). Epson has the most favourable customer sentiments. 
+									A deeper analysis of what Epson performed well in could shed light on areas of improvement for HP to remain competitive. </p>
+								<div class="image main"><img src="images/printer-13.jpg" alt="" /></div>
+								<p>Figure 13: Percentage of Sentiments across Brands</p>								
 								
-								<h5>5.2. Desalination Plants</h5>
-								<table>
-									<thead>
-										<tr>
-										<th style = "width:25%"></th>
-										<th style = "width:25%">Year Built</th>
-										<th style = "width:25%">Capacity (10<sup>6</sup> m<sup>3</sup>/year)</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-										<td>SingSpring Desalination Plant</td>
-										<td>2005</td>
-										<td>49.8</td>
-										</tr>
-										<tr>
-										<td>Tuas South Desalination Plant</td>
-										<td>2013</td>
-										<td>116.25</td>										
-										</tr>
-										<tr>
-										<td>Tuas Desalination Plant</td>
-										<td>2018</td>
-										<td>49.8</td>										
-										</tr>
-										<tr>
-										<td>Marina East Desalination Plant</td>
-										<td>2020</td>
-										<td>49.8</td>										
-										</tr>
-										<tr>
-										<td>Jurong Island Desalination Plant</td>
-										<td>2020</td>
-										<td>49.8</td>										
-										</tr>
-									</tbody>
-								</table>		
-								<p>Table 4: Table of Desalination Plants, their Year Built, and Production Capacity</p>
-
-								<p>Capacity of new desalination plants is estimated to be the average of the three latest plants. It is also assumed that all plants operate at maximum capacity all the time.</p>
-
-								<h5>5.3. NEWater</h5>
-								<table>
-									<thead>
-										<tr>
-										<th style = "width:25%"></th>
-										<th style = "width:25%">Year Built</th>
-										<th style = "width:25%">Capacity (10<sup>6</sup> m<sup>3</sup>/year)</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-										<td>Bedok NEWater Factory</td>
-										<td>2002</td>
-										<td>14.6</td>
-										</tr>
-										<tr>
-										<td>Kranji NEWater Factory</td>
-										<td>2002</td>
-										<td>12.4</td>										
-										</tr>
-										<tr>
-										<td>Seletar NEWater Plant</td>
-										<td>2004</td>
-										<td>Decommissioned</td>										
-										</tr>
-										<tr>
-										<td>Keppel Seghers NEWater Plant</td>
-										<td>2007</td>
-										<td>54</td>										
-										</tr>
-										<tr>
-										<td>Sembcorp NEWater Plant</td>
-										<td>2010</td>
-										<td>83.2</td>										
-										</tr>
-										<tr>
-										<td>BEWG-UESH NEWater Plant</td>
-										<td>2017</td>
-										<td>83.2</td>										
-										</tr>
-									</tbody>
-								</table>		
-								<p>Table 5: Table of NEWater Plants, their Year Built, and Production Capacity</p>
-
-								<p>Capacity of new NEWater plants is estimated to be the average of the three latest plants. It is also assumed that all plants operate at maximum capacity all the time.</p>
-
-								<h5>5.4. Local Water Catchment Areas</h5>
-								<p>Water from the local catchment is computed in the “SS Water_CM” sheet. Water from the local water catchment refers to the amount of rainfall that can be captured and used. The maximum water supply from local catchment is computed considering the total rainfall and catchment land area, using Appendix A – Equation 9. The rainfall intensity is set at the 75th, 50th and 25th percentiles of historical annual rainfall (1982-2021).<br>
-								<h6>Catchment coverage:</h6>
-								<p>	•	Current local catchment area covers 67% of Singapore’s land area, and it is planned to be increased to 90% by 2060 (PUB, 2015; Centre for Liveable Cities, 2019). Catchment coverage is assumed to increase linearly.
-									•	We have also assumed that total land area is constant until 2060 (i.e. no land reclamation).<br></p>
-								<h6>Water loss:</h6>
-								<p>	•	70% due to evapotranspiration (Friedrich et al., 2018) and an additional of 10 % due to seepage (Cotton Catchment Communities, 2011).</p>
+								<h6>Sentiments by Topic and Brand</h6>
+								<p>Using the topics derived from LDA, we analysed sentiment distribution at a topic and brand level. The findings were similar to those found using ratings in Section 6.1 above. “Support and returns” was the most prevalent dominant topic for negative reviews due to the negative connotations of the topic, and “print and scan quality” was the most prevalent dominant topic for positive reviews (Figure 14). 
+									Figure 15 shows the topic distribution by sentiment and brand. For HP’s positive reviews, “print and scan quality” is the highest followed closely by “setup and connecting” and “cartridge replacement”. 
+									Again, this suggests that HP is an all-rounder, and positive sentiments are mostly equally distributed among the 3 features. However, this could also mean that HP does not have a unique selling point to make customers choose their products over their competitors’, which the marketing and product team may want to take into consideration. 
+									In comparison, Epson’s positive sentiments are strongly associated with “print and scan quality” which is clearly the standout feature for Epson printers. 
+									Given that printing and scanning are core features of printers, the respective teams within HP should consider diving deeper why customers are much more satisfied with their competition’s print and scan quality.</p>
+								<div class="image main"><img src="images/printer-14.jpg" alt="" /></div>
+								<p>Figure 14: Overall Topic Distribution by Sentiments</p>
+								<div class="image main"><img src="images/printer-15.jpg" alt="" /></div>
+								<p>Figure 15: Topic Distribution for Each Sentiment by Brand</p>								
 								
-								<h4>6. Demand & Supply Computation</h4>
-								<p>According to the water loop diagram in Figure 4, the demand for domestic and non-domestic potable water are fulfilled by water catchment, imported water and desalination plants. 
-									While the demand for non-potable water (i.e. industrial and NEWater demand) are to be fulfilled by NEWater plants.</p>
-								<div class="image main"><img src="images/water-04.jpg" alt="" /></div>
-								<p>Figure 4: Water Loop Diagram on the Sources of Both Potable and Non-Potable Water</p>
-
-								<p>To determine the number of desalination and NEWater plants to be built by 2060 for Singapore to be self-sufficient, there are several computations as follows:<br>
-								<h5>•	Excess/Shortfall</h5>
-								<p>Excess or shortfall refers to the amount of water left after subtracting water demand from water supply. Excess of water supply is reflected by a positive value, and shortfall a negative value. This is calculated using Appendix A – Equation 10. <br></p>
-								<h5>•	Number of Additional Plants</h5>
-								<p>The supply and demand are divided into potable and non-potable water. When there is a shortfall in water supply as compared to demand, additional desalination and NEWater plants are required to be built to fulfil the demand for potable and non-potable water respectively.</p>
-
-
-								<h4>7. Analysis</h4>
-								<p>Based on the historical record and the forecasted values, both potable and non-potable water demand increases steadily across the years. With this demand, Singapore would need to increase the source of the supply for both potable and non-potable water so that Singapore can be self-sufficient by year 2060.</p>
-								<div class="image main"><img src="images/water-05.jpg" alt="" /></div>
-								<p>Figure 5: Forecasted Total Water Demand with 2 months of Buffer for Reserve</p>
-								<div class="image main"><img src="images/water-06.jpg" alt="" /></div>
-								<p>Figure 6a: Potable Water Demand/Supply (Expected Pre-Set Scenarios)</p>
-								<div class="image main"><img src="images/water-07.jpg" alt="" /></div>
-								<p>Figure 6b: Non-Potable Water Demand/Supply (Expected Pre-Set Scenarios)</p>
-								<p>Figure 6 describes the supply and demand for potable water (left) and non-potable water (right) after building additional desalination and NEWater plants respectively. The red dot in supply indicates the year by which desalination/NEWater plants are required to be built. 
-									The number of additional desalination and NEWater plants that are required for Singapore to be self-sufficient in 2060 for the various pre-set scenarios are summarised as follows.</p>
-			
-								<table>
-									<thead>
-										<tr>
-										<th style = "width:25%">Pre-Set Scenario</th>
-										<th style = "width:25%">Number of Additional Desalination Plants</th>
-										<th style = "width:25%">Desalination Plants Required By Year</th>
-										<th style = "width:25%">Number of Additional NEWater Plants</th>
-										<th style = "width:25%">NEWater Plants Required By Year</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-										<td>Low Scenario</td>
-										<td>0</td>
-										<td>-</td>
-										<td>3</td>
-										<td>2042,2051,2060</td>
-										</tr>
-										<tr>
-										<td>Expected Scenario</td>
-										<td>3</td>
-										<td>2040, 2051, 2062</td>										
-										<td>6</td>
-										<td>2038, 2044, 2049, 2053, 2056, 2059</td>	
-										</tr>
-										<tr>
-										<td>High Scenario</td>
-										<td>9</td>
-										<td>2022, 2022, 2036 2042, 2047, 2052, 2057, 2061, 2065</td>										
-										<td>9</td>
-										<td>2036, 2041, 2045, 2049, 2052, 2054, 2057, 2059, 2062</td>							
-										</tr>
-									</tbody>
-								</table>									
-								<p>Table 6: Table of Desalination & NEWater Plants, with Required Year under Pre-Set Scenarios</p>
-
-								<p>In the LOW and EXPECTED pre-set scenarios, more NEWater plants are required than desalination plants because non-domestic demand exceeds domestic demand and non-domestic non-potable water demand is fulfilled by NEWater plants.<br>
-									According to Tan and Rawat (2018), NEWater is more energy-efficient and cost-efficient to produce as compared to desalination, meaning that it is more costly to increase potable supply than non-potable supply. 
-									As such, to reduce the cost of ensuring sufficient water supply, more focus should be placed on securing natural potable water sources from the local catchment and reducing potable water consumption. <br>
-									The following trade-off and sensitivity analyses use the EXPECTED pre-set scenario as a base.</p>	
-
-								<h5>7.1. Price Hike Trade Off Analysis</h5>
-								<div class="image main"><img src="images/water-08.jpg" alt="" /></div>
-								<p>Figure 7a: Total Potable Water Demand with Different Rate of Price Hike (0%, 3%, 6%, 9% and 12%)</p>
-								<div class="image main"><img src="images/water-09.jpg" alt="" /></div>
-								<p>Figure 7b: Total Non-Potable Water Demand with Different Rate of Price Hike (0%, 3%, 6%, 9% and 12%)</p>
-
-								<p>The price hike trade-off analysis examines how demand changes with different rates of water tariff increase. Figure 7 shows the effect of a price hike of 0%, 3%, 6%, 9%, 12% in the EXPECTED pre-set scenario. Increasing the water tariff does not significantly affect both potable and non-potable water demand. 
-									This is because water is a necessity, and its demand is price inelastic.</p>
-
-								<h5>7.2. Rainfall Sensitivity Analysis</h5>
-								<p>The rainfall sensitivity analysis studies the impact of different rainfall intensities on the total supply of potable water. 
-									Three cases based on historical annual rainfall are shown: low rainfall at 25th percentile, medium rainfall at 50th percentile, and high rainfall at 75th percentile. <br>
-									Figure 8 shows the demand and supply of potable water with the three rainfall intensity cases under the EXPECTED pre-set scenario where Malaysia’s water agreement ends in 2040. 
-									The intersection between the demand and supply lines indicates the year by which the addition of desalination plant is required. In the case where there is low and medium rainfall, the first desalination plant must be built by 2040 to prevent shortage. This means that if Malaysia terminates imported water supply suddenly, there is a 50% chance Singapore will face potable water shortage. 
-									With high rainfall, new plants are only needed by 2048, giving Singapore more time to prepare and build the required first desalination plant.</p>
-								<div class="image main"><img src="images/water-10.jpg" alt="" /></div>
-								<p>Figure 8: Total potable water demand and supply with different rainfall volume</p>
-
-								<p>The amount of rainfall is a crucial deciding factor in the sufficiency of potable water supply in the event of sudden termination of imported water supply. As such, expansion of catchment area should be one of the key areas of focus.</p>
-
-								<h5>7.3. Water Conservation Efforts Sensitivity Analysis</h5>
-								<div class="image main"><img src="images/water-11.jpg" alt="" /></div>
-								<p>Figure 9a: Total Potable Water Demand with +/-10% from the Conservation Effort Target</p>
-
-								<div class="image main"><img src="images/water-12.jpg" alt="" /></div>
-								<p>Figure 9b: Total Non-Potable Water Demand with +/-10% from the Conservation Effort Target</p>
-
-								<p>The water conservations sensitivity examines how demand changes depending on whether the water conservation targets are not met (target +10%), met (on target) or exceeded (target -10%). 
-									In the EXPECTED pre-set scenario, 10% difference from the target significantly affects potable water demand by around 80 million m3 and non-potable water demand for around 65 million m3 in 2060. 
-									In total, about 145 million m3 can be saved annually if the conservation target is lowered by 10%. 
-									Therefore, it is important for PUB to initiate wide range of conservation efforts plan to encourage prudent water usage and ensure that the targets are met. </p>
-
-								<h4>8. Model Limitation & Future Work</h4>
+								<h3>6. Document Retrieval</h3>
+								<p>We tested multiple methods for document retrieval such as Vector Space Model using unigrams and bigrams, as well as TensorFlow Pre-trained Sentence Encoder. 
+									The bigram Vector Space Model with cosine similarity demonstrated the best performance and processing efficiency. </p>
 								
-								<p>The model has some limitations due to lack of data and some assumptions made to build the model. For a more accurate estimation of additional plants needed to ensure water self-sufficiency, the future work should focus on addressing these limitations:<br>
-									•	The model does not account for fact that potable water can be used for non-potable uses which could result in wastage of excess supply of potable water in some years. However, we note that this is rarely done because the cost of processing non-potable water is less than potable water.<br>
-									•	The model does not account for seasonal fluctuations in rainfall because it uses annual total rainfall. During periods of low rainfall, there may be shortage if there is insufficient water reserve buffer. During high rainfall months, not all rainfall can be collected as there is flooding risk. Seasonal rainfall fluctuations may become more pronounced in the future due to climate change and increase short term uncertainty of supply (NCCS, n.d.).<br>
-									•	The model does not account for capital and operating costs of plants and water processing. In considering when and which plants to build, the Government would also need to account for these cost factors.<br>
-									•	The model also does not account for the possibility of new technologies that can be more efficient (i.e. higher capacity processed per day) and cost-effective in processing water in the future (e.g. nuclear desalination).</p>
+								<h4>Vector Space Model</h4>
+								<p>Initially, we preprocessed the reviews by tokenizing them into unigrams and converted each review into a raw term frequency and TF-IDF vector. The same preprocessing steps are applied to queries to calculate the cosine similarity between these queries and the review corpus. The unigram approach performed admirably for certain queries that consist of standalone keywords. However, it struggles with queries that require preserving the word order, such as "low quality." In such cases, the model retrieves results if the reviews contain the individual words "low" and "quality," even if they are from entirely different contexts, like "good quality low price". <br>
+									To address this limitation, we incorporated bigrams into our vocabulary. This enhancement enables us to extract more pertinent reviews even though the similarity scores were lower than those of the unigram model. From Figure 16 and Figure 17, we can see that the top results retrieved are more closely aligned with the "low quality" according to user’s searching intention.</p>
+								<div class="image main"><img src="images/printer-16.jpg" alt="" /></div>
+								<p>Figure 16: Results from Unigram Model for Query - Low Quality</p>
+								<div class="image main"><img src="images/printer-17.jpg" alt="" /></div>
+								<p>Figure 17: Results from Bigram Model for Query - Low Quality</p>	
 
-								<h4>9. Conclusion</h4>
-								<p>This model allows policy makers to easily test different scenarios and to plan relevant demand-side and supply-sides measures to achieve water self-sufficiency before the termination of Singapore-Malaysia’s imported water agreement. <br>
-									Based on the analysis above, we can conclude that the most direct impact from the termination of Malaysia’s imported water agreement would be on the potable water supply as it contributes 37% of it. To ensure Singapore is self-sufficient on potable water, Singapore must boost supply of the two other sources of potable water. As the current water catchment area is only at 66%, Singapore would need to focus on the expansion of the catchment area to 90% to fully utilize the natural rainfall supply of water. In addition, as the rate of climate change is unpredictable, it is recommended that Singapore expect the worst situation of low rainfall and add on more desalination plants to substantiate the potable water supply. Furthermore, the addition of NEWater plants would ensure that non-domestic water demand does not need to draw from potable water sources as the non-domestic water demand outstrips domestic water demand. <br>
-									This study highlights that Singapore’s ability to self-sufficient in water hinges on the growth of water demand. Therefore, the key to allow Singapore being self-sufficient is to focus on conservation efforts plan to ensure prudent water usage by households and businesses.</p>
+								<h4>Pre-Trained Model</h4>
+								<p>Cosine similarity in Vector Space Model relies on presence of common terms to measure similarity and retrieve results. 
+									Reviews that are semantically related but do not share keywords will yield a low or zero cosine similarity and cannot be retrieved. 
+									In Figure 18, unrelated results may surface since it matches based on common words, which may not capture the semantic context in the query “bad connection”.
+									To address this constraint, we employed the TensorFlow Universal Sentence Encoder for embedding reviews at sentence level to account for semantically related terms. 
+									Based on the description on TensorFlow Hub website (n.d.), the model is pre-trained on a variety of data sources and can embed sentences into high-dimensional vectors to capture the meaning of word sequences. 
+									Thus, it should be able to retrieve documents with similar meanings to the query even if there are no shared keywords. 
+									In Figure 19, results for “bad connection” are returned even if the keywords do not match exactly but have similar meanings. </p>
+								<div class="image main"><img src="images/printer-18.jpg" alt="" /></div>
+								<p>Figure 18: Results from Bigram Model for Query - Bad Connection</p>
+								<div class="image main"><img src="images/printer-19.jpg" alt="" /></div>
+								<p>Figure 19: Results from Universal Sentence Encoder Embedding</p>	
 
+								<p>However, in our primary document retrieval use cases for the project, users can filter review rating then enter keywords like "paper jam" or "ink subscription," to uncover detailed review information. 
+									We have confirmed that these keywords are frequently and explicitly mentioned by customers in their reviews. 
+									In these cases, the Bigram Vector Space Model has proven to be a suitable and sufficient solution for our requirements. 
+									As a result, we have chosen to incorporate the Bigram model into our final interface.</p>
+								
+								<h4>UI for In-House Sharing</h4>
+								<p>To facilitate inter-departmental information sharing, we developed a user-friendly interface (UI) application using Streamlit, (Figure 20). 
+									The application not only facilitates document retrieval through open-ended keyword queries but also offers users flexibility to filter documents by various criteria (brand, rating, and price range) to suit their specific needs. 
+									Users can select a topic generated through LDA and further input keywords like "ink subscription" to explore related reviews in depth (Figure 21). 
+									The interface presents reviews categorized by brand, enabling users to compare the quantity of related reviews for each brand and delve into model details and review content. </p>
+								<div class="image main"><img src="images/printer-20.jpg" alt="" /></div>
+								<p>Figure 20: UI App of Review Criteria Selection</p>
+								<div class="image main"><img src="images/printer-21.jpg" alt="" /></div>
+								<p>Figure 21: Results from Document Retrieval UI App</p>	
+
+								<h3>7. Discussion and Gap Analysis</h3>
+								<p><b>Topic modelling:</b> Evaluation of meaning is inherently difficult for machines, hence the objective measurements of model quality like coherence score and perplexity are often unreliable. 
+									As the corpus for this study is not very large, human evaluation was still possible. However, as the number of topics grows, this will pose as a challenge. In addition, we used trail-and-error to refine the stop words list to get better topic key words that were not merely collections of opinions. This could have been optimized by using sentiment analysis to identify and remove high frequency opinion words. <br>
+								<b>Sentiment analysis:</b> The overall accuracy of the sentiment analysis model was less than ideal when compared against the actual review ratings at only 61%. 
+								While there may be more inclination for the company to focus on the negative sentiments which had a higher recall of 68%, the model still has room for improvement. After a closer inspection, our team realized that the length of the reviews could be one of the reasons for the poor accuracy where there were mixed sentiments within a review. 
+								Some reviews were also not completely relevant to the product where it included opinions that users had about other products to draw comparisons. This may be addressed by performing analysis at a sentence level and using a more sophisticated model that could identify the targets of the sentiments. 
+								Variants of LDA that incorporate sentiment analysis (e.g. Joint-Sentiment-Topic) may be able to pick up topics within the sentiments for more detailed understanding of features of printers and the attached sentiments.<br>
+								<b>Document retrieval:</b> The accuracy of document retrieval results was enhanced by implementing a two-step process in our interface. Initially, users could select negative or positive ratings, and then input brief, neutral keywords, avoiding the use of subjective terms like "bad" or "good." 
+								Unfortunately, the bigram embedding model may sometimes return unrelated reviews with a high cosine similarity score when users input subjective descriptions such as "bad connections". This occurs because the vector space model relies on exact word matches without considering word sequences or semantics. 
+								Additionally, our current document retrieval model is primarily designed for short keyword inputs and may not perform optimally when users input sentences. To enhance both the model's performance and the user experience, incorporating a Large Language Model (LLM) for sentence embedding and leveraging cosine similarity calculations would be beneficial. This approach would allow users to input longer query requests and receive semantically relevant results in document retrieval.</p>
+								
+								<h3>8. Future Work and Conclusion</h3>
+								<p>Future work for this project can encompass various avenues for improvement and expansion, including: </p>
+								<p>•	<b>Fine-Tuning Models:</b> Refine the sentiment analysis and topic modeling models to achieve higher accuracy and better performance. Experiment with different algorithms and approaches to enhance the quality of insights.<br>
+								•	<b>Feedback Loop:</b> Including a review rating system for the business end users to create a feedback loop on the helpfulness and accuracy of the results to improve the performance of document retrieval.<br>
+								•	<b>Time-Series & Sales Analysis:</b> Discovery of relationship between sentiment scores and historical sales data would also help to reveal meaningful insights regarding how sentiment impacts product performance.<br>
+								•	<b>Integration with e-Commerce Platforms:</b> Create integrations or plugins for e-commerce platforms like Amazon to provide shoppers with instant sentiment analysis and topic summaries for products they are considering.<br>
+								•	<b>Integration with Customer Chatbots:</b> Create integrations or plugins to detect sentiments from customer service calls transcript/ conversations to help customer chatbot engage contextually.<br>
+								•	<b>Sentiment-Based Product Improvement:</b> Collaborate with manufacturers to use sentiment analysis data for product enhancements and innovations based on customer feedback, thereby creating a feedback loop.</p>
 								<p> <br></p>
-								<a href="https://github.com/peacetay/SingaporeWaterAnalysis" class="button">View Scripts Here!</a>					
+								<a href="https://github.com/peacetay/ProductReviews" class="button">View Scripts Here!</a>					
 							</section>
 
 					</div>
