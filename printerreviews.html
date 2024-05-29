@@ -105,12 +105,12 @@
 								
 								<h4>Exploratory Data Analysis</h4>
 								<p>All printer models had positive average overall ratings above 4.0 stars. 
-									Reviews tended towards extremes with higher proportion of reviewers giving 1- or 5-star reviews (Figure 4 1). 
-									In addition, negative reviews tended to be longer than positive reviews (Figure 4 2); dissatisfied customers tended to give detailed explanations of problems encountered. 
-									As seen in Figure 4 3, Epson's reviews were the most dichotomized with higher proportions of both 1 and 5-star reviews. 
+									Reviews tended towards extremes with higher proportion of reviewers giving 1- or 5-star reviews (Figure 2). 
+									In addition, negative reviews tended to be longer than positive reviews (Figure 3); dissatisfied customers tended to give detailed explanations of problems encountered. 
+									As seen in Figure 4, Epson's reviews were the most dichotomized with higher proportions of both 1 and 5-star reviews. 
 									These contrasting evaluations underscore the challenges of catering to diverse customer needs, where not every product can meet the unique needs and expectations of every consumer. 
 									These findings underscore the importance of addressing negative feedback and continuously striving for product improvement in a competitive marketplace. 
-									In the realm of popular vocabulary analysis, terms such as “work”, “time”, “connect” and “cartridge” emerged as frequent favorites, echoing the key aspects consumers prioritize when evaluating printers (Figure 4 4). 
+									In the realm of popular vocabulary analysis, terms such as “work”, “time”, “connect” and “cartridge” emerged as frequent favorites, echoing the key aspects consumers prioritize when evaluating printers (Figure 5). 
 									This intriguing landscape of discoveries sets the stage for our subsequent experiments, where we delve deeper into the intricacies of topic modelling and sentiment analysis. 
 									These advanced techniques are poised to unveil even more insights into the scenarios we are about to explore, providing a robust foundation for shaping product development and elevating customer satisfaction through data-driven decision-making.</p>
 								<div class="image main"><img src="images/printer-02.jpg" alt="" /></div>
@@ -126,8 +126,8 @@
 								<h5>Topic Modelling</h5>
 								<p>Latent Dirichlet Allocation (LDA) was used to perform topic modelling. 
 									A new list of stop words was derived through trail-and-error to remove words that did not contribute to the meaning of the topics, especially subjective words like “love” or “horrible”. 
-									Some common words previously removed were added back in for added clarity (e.g. “ink”).</p>
-								<p>We attempted to use Umass coherence score to determine the optimum number of topics because it is based on co-occurrence statistics within the corpus rather than an external reference corpus (Mimno et al., 2011). 
+									Some common words previously removed were added back in for added clarity (e.g. “ink”).<br>
+									We attempted to use Umass coherence score to determine the optimum number of topics because it is based on co-occurrence statistics within the corpus rather than an external reference corpus (Mimno et al., 2011). 
 									However, topics derived from optimal Umass were not necessarily more coherent, so human evaluation was eventually used to decide the number of topics and hyperparameters of alpha and eta. 
 									The final model used alpha=5, eta=0.1 and k=5.</p>
 								<h5>Sentiment Analysis</h5>
